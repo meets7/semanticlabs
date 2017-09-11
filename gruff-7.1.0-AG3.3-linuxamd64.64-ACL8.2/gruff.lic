@@ -1,0 +1,22 @@
+;; An Allegro CL runtime application consists of the files in the
+;; directory created by (on Unix and Windows) calling
+;; EXCL:GENERATE-APPLICATION or (on Windows only) invoking the menu
+;; command Files | Build Project Distribution or calling
+;; CG:BUILD-PROJECT with argument :EXE-ONLY specified NIL. You may not
+;; include in a runtime application any other files from the Allegro
+;; Directory except source files you have written yourself and/or
+;; compiled versions of those files.
+;; 
+;; Please see your Allegro CL License Agreement (entitled `FRANZ
+;; SOFTWARE LICENSE AGREEMENT'), along with any additions and
+;; supplements, for information on your rights to distribute a runtime
+;; application. Note that being licensed to create an Allegro CL
+;; runtime application does not, by itself, give you rights to
+;; distribute it. Rights to distribute Allegro CL runtime applications
+;; and terms that must be imposed on the recipients are controlled by
+;; the Allegro CL License Agreement.
+
+
+(:dynamic 315288610285285719947752578302871886998
+ (:dynamic (8 2 :final) :linux86-64 "Franz Inc. Staff" nil nil
+  "bc22cf9ec57d32c2f86f8219ed77c3a8"))

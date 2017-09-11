@@ -1,0 +1,2748 @@
+<html><head><title>GruffJS</title>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta charset="utf-8"/>
+
+<style>
+
+.body {
+  overflow: hidden;
+}
+.statusBar {
+  overflow: hidden;
+  position: absolute;
+  margin: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 24px;
+  font-family: sans-serif;
+  font-size: 16px;
+  margin: 0px;
+  padding: 0px 12px;
+  background: #f4f0e0;
+}
+.menuBar {
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 28px;
+  font-family: sans-serif;
+  font-size: 16px;
+  list-style-type: none;
+  border: none;
+  margin: 0px;
+  padding-left: 30px;
+  background: #d0d8e0;
+}
+.titleBar {
+  display: inline-block;
+  text-align: right;
+  border: none;
+  margin: 0px;
+  padding: 4px 12px;
+  text-decoration: none;
+}
+.menuBarItem {
+  display: inline-block;
+  text-align: center;
+  border: none;
+  margin: 0px;
+  padding: 4px 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.menuBarItemFocused {
+  background: #88ccff;
+}
+.commandMenu {
+  display: none;
+  position: absolute;
+  list-style-type: none;
+  font-family: sans-serif;
+  font-size: 14px;
+  text-align: left;
+  border: none;
+  margin-left: -30px;
+  margin-top: 4px;
+  padding: 0;
+  background: #e8e8e8;
+  box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.2);
+  z-index: 1;   
+}
+.popUpMenu {
+  display: none;
+  position: absolute;
+  list-style-type: none;
+  font-family: sans-serif;
+  font-size: 14px;
+  text-align: left;
+  border: none;
+  margin: 0px;
+  padding: 8px;
+  background: #e8e8e8;
+  box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.2);
+  z-index: 1;   
+  overflow: auto;
+  top: 20%;
+  left: 40%;
+}
+.dividerBelow {
+  margin-bottom: 3px;
+}
+.dividerAbove {
+  border-top: 3px solid #BBBBBB;
+  padding-top: 4px;
+}
+.graphView   {
+  position: absolute;
+  left: 0; right: 0; top: 28px; bottom: 28px;
+  background: #c8c8b8;
+}
+.legend {
+  position: absolute;
+  margin: 0px;
+  overflow: auto;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  width: 228px;
+  background: #ece8d8;
+}
+.legendCanvas {
+  margin: 0px;
+}
+.nodePane {
+  position: absolute;
+  margin: 0px;
+  overflow: scroll;
+  top: 0px;
+  bottom: 0px;
+  left: 240px;
+  right: 0px;
+  background: #f4f0e0;
+  cursor: default;
+}
+.nodePaneCanvas {
+  margin: 0px;
+}
+.choiceListDialog {
+  display: none;
+  z-index: 2;
+  position: fixed;
+  background: #e4e0d0;
+  border: 3px solid gray;
+  margin: 0px;
+  top: 15%;
+  bottom: 15%;
+  left: 30%;
+  right: 30%;
+  text-align: center;
+}
+.stringDialog {
+  display: none;
+  z-index: 2;
+  position: fixed;
+  background: #e4e0d0;
+  border: 3px solid gray;
+  margin: 0px;
+  top: 25%;
+  height: 178px;
+  left: 25%;
+  right: 25%;
+  text-align: center;
+}
+.messageDialog {
+  display: none;
+  z-index: 2;
+  position: fixed;
+  background: #e4e0d0;
+  border: 3px solid gray;
+  margin: 0px;
+  top: 25%;
+  bottom: 25%;
+  left: 25%;
+  right: 25%;
+  text-align: left;
+}
+.okButton {
+  position: absolute;
+  margin: 0px;
+  left: 16px; bottom: 8px; height: 34px; width: 100px;
+  font-family: sans-serif;
+  font-size: 18px;
+}
+.cancelButton {
+  position: absolute;
+  margin: 0px;
+  left: 124px; bottom: 8px; height: 34px; width: 100px;
+  font-family: sans-serif;
+  font-size: 18px;
+}
+.modalPrompt {
+  overflow: auto;
+  position: absolute;
+  margin: 0px;
+  left: 16px; top: 8px; right: 16px; height: 72px;
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 18px;
+}
+.choiceListDialogItemList {
+  position: absolute;
+  left: 16px; right: 16px; top: 88px; bottom: 50px;
+  font-family: sans-serif;
+  font-size: 14px;
+  border: 1px solid gray;
+  margin: 0px;
+  padding: 8px;
+  background: white;
+  text-align: left;
+  overflow: auto;
+}
+.listItem {
+  display: block;
+  margin: 0px;
+  padding: 3px 8px;
+  cursor: pointer;
+}
+.listItemFocused {
+  background: #88ccff;
+}
+.listItemSelected {
+  background: #cfdfef;
+}
+.listItemSelectedAndFocused {
+  background: #77bbee;
+}
+.stringEntry {
+  position: absolute;
+  left: 16px;
+  top: 88px;
+  width: 600px;
+  height: 40px;
+  font-family: sans-serif;
+  font-size: 16px;
+  border: 1px solid gray;
+  padding: 8px;
+  background: white;
+  text-align: left;
+  overflow: auto;
+}
+.icon {
+  position: absolute;
+  margin: 0px;
+  left: 16px; top: 16px; right: 64px; bottom: 64px;
+}
+.dialogMessage {
+  overflow: auto;
+  position: absolute;
+  margin: 0px;
+  left: 80px; top: 8px; right: 16px; bottom: 50px;
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 18px;
+}
+.dom-container {
+  padding: 10px 5px;
+}
+.legend-node {
+  display: inline-block;
+  padding: 2px;
+  border: 1px solid black;
+  margin: 5px 0;
+}
+.legend-link {
+  text-align: left;
+  padding: 2px;
+  margin: 5px 0;
+}
+.waiting {
+  cursor: wait;
+}
+
+</style>
+<script>
+
+var gruff = {
+
+  // ---------
+  // Variables
+  // ---------
+
+  host: "localhost",
+  port: 8008,
+  nodeFontHeight: 15,
+  nodeLineHeight: 17,
+  linkFontHeight: 14,
+  layout: null, // 2017-04-12a
+  slidingSteps: 16, // 2017-04-12a
+  animateLayouts: true, // 2017-04-12a
+
+  // -------
+  // Objects
+  // -------
+
+  // The alphabetized master list of all commands,
+  // with labels and keyboard shortcuts.
+  commands: {
+    animateLayouts: {
+      label: "Animate Layouts",
+      shortcut: { key: "0" } },
+    centerLayout: {
+      label: "Center the Graph",
+      shortcut: { key: "c" } },
+    conservativeLayout: {
+      label: "Update Layout Conservatively",
+      animate: true,
+      shortcut: { key: "6" } },
+    copy: {
+      label: "Copy",
+      shortcut: { key: "c", control: true } },
+    deselectSelectedNode: {
+      label: "Deselect the Selected Node",
+      shortcut: { key: " " } },
+    displayALinkedNodeFromMenus: {
+      label: "Display a Linked Node from Menus",
+      animate: true,
+      shortcut: { key: "u" } },
+    displayLinkedNodes: {
+      label: "Display Linked Nodes",
+      animate: true,
+      shortcut: { key: "f" } },
+    displayNonLeafLinkedNodes: {
+      label: "Display Non-Leaf Linked Nodes",
+      animate: true,
+      shortcut: { key: "f", control: true } },
+    displayNodeByLabel: {
+      label: "Display a Node by Label",
+      shortcut: { key: "L", shift: true } },
+    displayNodeByURI: {
+      label: "Display a Node by URI or Literal",
+      shortcut: { key: "U", shift: true } },
+    displayOnlyLinkedNodes: {
+      label: "Display Only Linked Nodes",
+      animate: true,
+      shortcut: { key: ";" } },
+    displayOnlyPathsBetweenTwoNodes: {
+      label: "Display Only Paths Between Two Nodes",
+      shortcut: { key: "V", shift: true } },
+    displayPathsBetweenTwoNodes: {
+      label: "Display Paths Between Two Nodes",
+      animate: true,
+      shortcut: { key: "F", shift: true } },
+    displayRecentNode: {
+      label: "Display a Recently Selected Node",
+      shortcut: { key: "R", shift: true } },
+    displaySampleTriples: {
+      label: "Display Some Sample Triples",
+      shortcut: { key: "a", control: true, alt: true } },
+    displaySubjectsByTextSearch: {
+      label: "Display Nodes by Text Search",
+      shortcut: { key: "h" } },
+    displayTriplesByTextSearch: {
+      label: "Display Triples by Text Search",
+      shortcut: { key: "H", shift: true } },
+    doGoogleSearchOnNodeLabel: {
+      label: "Do Google Search on Node Label",
+      shortcut: { key: "V", shift: true, control: true } },
+    drawLinkLabels: {
+      label: "Draw Link Labels",
+      shortcut: { key: "n" } },
+    drawLinkLabelsHorizontally: {
+      label: "Draw Link Labels Horizontally",
+      shortcut: { key: "N", shift: true } },
+    fetchCurrentLayout: {
+      label: "Fetch the Current Layout",
+      animate: true,
+      shortcut: { key: "U", shift: true, control: true } },
+    fetchCommandHelpString: {
+      label: "Fetch Command Help String",
+      noStatusMessage: true },
+    fetchStoreInfo: {
+      label: "Fetch Store Info",
+      noStatusMessage: true },
+    fillInLinksForCurrentPredicates: {
+      label: "Fill In All Links for the Current Predicates",
+      shortcut: { key: "a" } },
+    goBack: {
+      label: "Go Back",
+      shortcut: { key: "z" } },
+    goForward: {
+      label: "Go Forward",
+      shortcut: { key: "y" } },
+    makeCanvasLarger: {
+      label: "Make Canvas Larger",
+      shortcut: { key: "." } },
+    makeCanvasSmaller: {
+      label: "Make Canvas Smaller",
+      shortcut: { key: "," } },
+    moveSelectedNode: {
+      label: "Move the Selected Node" },
+    orientTreeLayoutsVertically: {
+      label: "Orient Tree Layouts Vertically",
+      shortcut: { key: "t", control: true, alt: true } },
+    paste: {
+      label: "Paste",
+      shortcut: { key: "v", control: true } },
+    redoLayout: {
+      label: "Redo Layout from Scratch",
+      animate: true, // 2017-04-12a
+      shortcut: { key: "r" } },
+    removeAllLeafNodes: {
+      label: "Remove All Leaf Nodes",
+      shortcut: { key: "Z", shift: true, control: true } },
+    removeAllNodes: {
+      label: "Remove All Nodes",
+      shortcut: { key: "x", control: true, alt: true } },
+    removeAllOrphanNodes: {
+      label: "Remove All Orphan Nodes",
+      shortcut: { key: "Z", shift: true } },
+    removeSelectedNode: {
+      label: "Remove Selected Node",
+      shortcut: { key: "x" } },
+    reselectARecentlySelectedNode: {
+      label: "Reselect a Recent Node",
+      shortcut: { key: " ", shift: true, control: true } },
+    reselectPreviouslySelectedNode: {
+      label: "Reselect Previous Node",
+      shortcut: { key: " ", shift: true } },
+    scrollNodePane: {
+      label: "Scroll Node Pane",
+      noStatusMessage: true },
+    searchWikipediaOnNodeLabel: {
+      label: "Search Wikipedia on Node Label",
+      shortcut: { key: "v", control: true, alt: true } },
+    selectCurrentPredicates: {
+      label: "Select Current Predicates",
+      shortcut: { key: "p" } },
+    selectRecentCurrentPredicates: {
+      label: "Use a Recent Set of Current Predicates",
+      shortcut: { key: "P", shift: true } },
+    showWarningsInDialog: {
+      shortcut: { key: "W", shift: true },
+      label: "Show Warnings in Dialog" },
+    treeLayout: {
+      label: "Do Tree Layout from Selected Node",
+      animate: true,
+      // Avoid using Control-T like Gruff does here, because
+      // that's a standard browser keystroke to add a new tab.
+      shortcut: { key: "T", shift: true } },
+    treelikeSpringLayout: {
+      label: "Do Tree-Like Spring Layout",
+      animate: true,
+      shortcut: { key: "T", shift: true, control: true } },
+    updateLayout: {
+      label: "Update Layout Incrementally",
+      animate: true,
+      shortcut: { key: "d" } },
+    vigorousLayout: {
+      label: "Update Layout Vigorously",
+      animate: true,
+      shortcut: { key: "5" } },
+    viewStoreInWebView: {
+      label: "View Current Store in AGWebView",
+      shortcut: { key: "w", control: true, alt: true } },
+    visitWebPageOfNode: {
+      label: "Visit Web Page of Node",
+      shortcut: { key: "v" } },
+    zoomIn: {
+      label: "Zoom In",
+      shortcut: { key: "<", shift: true } },
+    zoomInAllTheWay: {
+      label: "Zoom In All the Way",
+      shortcut: { key: "<", control: true, shift: true } },
+    zoomOut: {
+      label: "Zoom Out",
+      shortcut: { key: ">", shift: true } },
+    zoomOutAllTheWay: {
+      label: "Zoom Out All the Way",
+      shortcut: { key: ">", control: true, shift: true } },
+    zoomInAroundTheMouse: {
+      label: "Zoom In Around the Mouse",
+      shortcut: { key: ",", control: true, alt: true } },
+  },
+
+  // The arrangement of commands in the menu bar tree.
+  menuBarCommands: [
+    { name: "View",
+      commands: [
+        "goBack",
+        "goForward",
+        "---",
+        "copy",
+        "paste",
+        "---",
+        "visitWebPageOfNode",
+        "doGoogleSearchOnNodeLabel",
+        "searchWikipediaOnNodeLabel",
+        "---",
+        "viewStoreInWebView",
+      ],
+    accessKey: "v",
+    },
+    { name: "Display",
+      commands: [
+        "displayNodeByURI",
+        "displayNodeByLabel",
+        "displayRecentNode",
+        "displaySampleTriples",
+        "---",
+        "displaySubjectsByTextSearch",
+        "displayTriplesByTextSearch",
+      ],
+      accessKey: "d",
+    },
+    { name: "Link",
+      commands: [
+        "displayLinkedNodes",
+        "displayNonLeafLinkedNodes",
+        "displayOnlyLinkedNodes",
+        "fillInLinksForCurrentPredicates",
+        "---",
+        "displayPathsBetweenTwoNodes",
+        "displayOnlyPathsBetweenTwoNodes",
+        "---",
+        "displayALinkedNodeFromMenus",
+      ],
+      accessKey: "l",
+    },
+    { name: "Remove",
+      commands: [
+        "removeSelectedNode",
+        "removeAllNodes",
+        "removeAllOrphanNodes",
+        "removeAllLeafNodes",
+      ],
+      accessKey: "r",
+    },
+    { name: "Layout",
+      commands: [
+        "redoLayout",
+        "updateLayout",
+        "vigorousLayout",
+        "conservativeLayout",
+        "---",
+        "treeLayout",
+        "treelikeSpringLayout",
+        "---",
+        "fetchCurrentLayout",
+        "---",
+        "makeCanvasLarger",
+        "makeCanvasSmaller",
+        "---",
+        "zoomOut",
+        "zoomIn",
+        "zoomOutAllTheWay",
+        "zoomInAllTheWay",
+        "zoomInAroundTheMouse",
+        "---",
+        "centerLayout",
+      ],
+      accessKey: "y",
+    },
+    { name: "Select",
+      commands: [
+        "deselectSelectedNode", 
+        "reselectPreviouslySelectedNode",
+        "reselectARecentlySelectedNode",
+      ],
+      accessKey: "s",
+    },
+    { name: "Options",
+      commands: [
+        "selectCurrentPredicates",
+        "selectRecentCurrentPredicates",
+        "---",
+        "animateLayouts",
+        "drawLinkLabels",
+        "drawLinkLabelsHorizontally",
+        "orientTreeLayoutsVertically",
+        "---",
+        "showWarningsInDialog",
+      ],
+      accessKey: "o",
+    },
+  ],
+
+  // A tree that maps keyboard shortcuts to their commands.
+  // This gets filled in at load time.
+  shortcuts: { alt: { control: { shift: {}, noShift: {} },
+                      noControl: { shift: {}, noShift: {} }},
+               noAlt: { control: { shift: {}, noShift: {} },
+                        noControl: { shift: {}, noShift: {} }}},
+
+  // -------
+  // Methods
+  // -------
+
+  // ------------------------
+  // Communicating with Gruff
+  // ------------------------
+
+  // Send a new command to Gruff.
+  sendCommandToGruff: function(commandName, args) {
+    gruff.log("sendCommandToGruff", commandName, args);
+    var command = gruff.commands[commandName],
+      query = "interactive?command=" + commandName;
+    if (args) {
+      query = query + "&" + args;
+    };
+
+    // Some commands require that we send additional arguments.
+    if (["makeCanvasSmaller", "makeCanvasLarger", "zoomIn", "zoomOut",
+         "zoomOutAllTheWay", "zoomInAllTheWay"].indexOf(commandName) >= 0)
+      query = query + "&min-width=" + gruff.nodePane.clientWidth +
+        "&min-height=" + gruff.nodePane.clientHeight;
+    else if (commandName == "animateLayouts") { // 2017-04-12a
+      gruff.animateLayouts = !gruff.animateLayouts
+      query = query + "&value=" + gruff.animateLayouts;
+      }
+    else if (commandName == "centerLayout")
+      query = query + "&width=" + gruff.nodePane.scrollWidth +
+        "&height=" + gruff.nodePane.scrollHeight;
+    else if (commandName == "zoomInAroundTheMouse")
+      query = query + "&x=" + gruff.nodePane.mouseX + 
+        "&y=" + gruff.nodePane.mouseY;
+
+    // Send the current mouse position in the web browser's node pane
+    // to these commands so that Gruff can position a new node there.
+    if (["displayNodeByLabel", "displayNodeByURI",
+         "displayRecentNode"].indexOf(commandName) >= 0)
+      query = query + "&mouseX=" + gruff.nodePane.mouseX +
+        "&mouseY=" + gruff.nodePane.mouseY;
+
+    // Some commands are handled here without talking to Gruff.
+    else if (["visitWebPageOfNode", "doGoogleSearchOnNodeLabel",
+              "searchWikipediaOnNodeLabel"].indexOf(commandName) >= 0) {
+      var selectedNode = gruff.findSelectedNode();
+      if (selectedNode) {
+        var url;
+        if (commandName == "doGoogleSearchOnNodeLabel")
+          url = "https://www.google.com/search?q=" + selectedNode.label;
+        else if (commandName == "searchWikipediaOnNodeLabel")
+          url = "https://en.wikipedia.org/wiki/Special:Search?search=" +
+            selectedNode.label;
+        else url = selectedNode.longString;
+        window.location.assign(url);
+      }
+      else gruff.statusMessage("There is no selected node.");
+      return;
+    };
+
+    gruff.currentCommand = command;
+    gruff.currentCommandName = commandName;
+    gruff.showCurrentCommandInStatusBar();
+    gruff.sendRequestToGruff(query, commandName == "selectNode");
+  },
+
+  // Send an HTTP request to Gruff.
+  // This is either for a new command or a followup
+  // after a user prompt in the middle of a command.
+  // Chrome's debugger says that calling XMLHttpRequest in the main
+  // thread is deprecated, and points to https://xhr.spec.whatwg.org/ .
+  sendRequestToGruff: function(query, noWaitingCurosr) {
+    gruff.log("sendRequestToGruff", query);
+    var request = new window.XMLHttpRequest(),
+      async = true, responseObject = null;
+    if (!noWaitingCurosr)
+      gruff.nodePane.canvas.classList.add("waiting");
+    try {
+      request.open("GET", gruff.gruffPath() + query, async);
+
+      // Set up a handler for a later asynchronous response from Gruff.
+      request.onreadystatechange = function () {
+        gruff.log("HTTP request state change", request,
+          request.readyState, request.status);
+        gruff.nodePane.canvas.classList.remove("waiting");
+        if (request.readyState === XMLHttpRequest.DONE) {
+          var status = request.status;
+          if (status === 0) {
+            gruff.currentCommand = null;
+            gruff.currentCommandName = null;
+            gruff.statusMessage(
+              "ERROR:  Could not connect to a Gruff HTTP server running on " +
+              gruff.host + " at port " + gruff.port + ".");
+          }
+          else if (status === 200) {
+            gruff.handleHttpResponse(request.responseText);
+          }
+          else {
+            gruff.log("HTTP request failure with status ", status);
+            gruff.currentCommand = null;
+            gruff.currentCommandName = null;
+            gruff.statusMessage (
+              "An HTTP request to Gruff failed with status " +
+               status + ".");
+          };
+        };
+      };
+      request.send();
+    }
+    catch (error) {
+
+      // On a failure to connect to Gruff, return an error
+      // message that's like a JSON error object from Gruff.
+      // jj This probably can be removed now that we do the
+      // HTTP request in synchronous mode, where it appears that
+      // this error handler is no longer reached, and instead we
+      // handle it in the onreadystatechange method above.
+      // due to switching to asynchronous mode.
+      console.log("HTTP send error", error);
+      responseObject = ({ "type": "error",
+        "data": { "message":
+          "Failed to connect to Gruff at " +
+          gruff.host + ":" + gruff.port +
+          " - " + error.name + " - " +
+          (error.message || "[no message]")
+      }});
+      gruff.handleresponseFromGruff(responseObject);
+    }
+    finally {
+    };
+  },
+
+  // Handle the raw JSON text that we receive from Gruff.
+  handleHttpResponse: function(responseText) {
+    var responseObject;
+    try {
+      responseObject = JSON.parse(responseText);
+    }
+    // Handle a JSON parsing error, giving the user lots of debugging info.
+    catch (error) {
+      gruff.log("JSON.parse error", responseText);
+      var message = error.message,
+        badLine = "",
+        lineNumberPhrase = "at line ",
+        lineNumberPhraseIndex = message.indexOf(lineNumberPhrase);
+
+      // If the error says what line of code the problem is in,
+      // then find that line of code to show to the user.
+      if (lineNumberPhraseIndex >= 0) { // 2016-09-12b
+        var lineNumberIndex = lineNumberPhraseIndex + lineNumberPhrase.length,
+          badLineNumberString = message.slice(lineNumberIndex,
+            message.indexOf(" ", lineNumberIndex)),
+          badLineNumber = parseInt(badLineNumberString);
+        if (badLineNumber) {
+          var badLineIndex = responseText.indexOfNth("\n", badLineNumber);
+          if (badLineIndex >= 0) {
+            var nextLineIndex = responseText.indexOf("\n", badLineIndex + 2);
+            badLine = "<br><br>Line " + badLineNumber + 
+              ": &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+              responseText.slice(badLineIndex + 2, nextLineIndex);
+          };
+        };
+      };
+      // On a JSON parsing error, prepare an error object to report
+      // as usual in the message dialog.
+      responseObject = ({ "type": "error",
+        "data": { "message":
+          "Error parsing the JSON response from " +
+          gruff.host + ":" + gruff.port +
+          " - " + error.name + " - " +
+          (message || "[no message]") + badLine +
+          "<br><br>" + responseText
+      }});
+    };
+    // In the usual case where we succesfully parsed the JSON object
+    // from Gruff, proceed to process that object.
+    gruff.handleresponseFromGruff(responseObject);
+  },
+
+  // Handle the parsed JSON object that we get back from Gruff.
+  // This is either a new layout or a request to prompt the user
+  // or else a success, failure, or error message.
+  handleresponseFromGruff: function(response) {
+    gruff.currentResponse = response;
+    var status = response.type,
+      data = response.data,
+      prompt = data.prompt,
+      message = data.message,
+      returnedCommandName = data["js-command"],
+      commandName, command, commandLabel;
+    if (returnedCommandName == "null") // 2017-04-12a
+      returnedCommandName = null;
+
+    // Returning the command name from Gruff is needed when it is handling
+    // interleaved commands, though it hasn't been set up for followups.
+    // So far it is used when initially fetching multiple things,
+    // including fetchStoreInfo.
+    if (returnedCommandName) { // 2016-09-13a
+      gruff.currentCommandName = returnedCommandName;
+      gruff.currentCommand = gruff.commands[returnedCommandName];
+    };
+    commandName = gruff.currentCommandName;
+    command = gruff.currentCommand,
+    commandLabel = command ? command.label : "Unknown Command";
+    gruff.log("response from Gruff", returnedCommandName, commandName,
+      command, status, response);
+
+    // If the currently selected node that was returned by a
+    // message is different than the one that we remember, then update
+    // our state and redisplay the layout to show the selected node.
+    var selectedNodeName = data["selected-node-name"];
+    if (selectedNodeName != gruff.selectedNodeName) { // 2016-09-13b
+      gruff.selectedNodeName = selectedNodeName;
+      gruff.invalidateNodePane();
+    };
+    if (status == "layout") {
+      gruff.statusMessage(commandLabel + " ==> " + message);
+      gruff.handleLayout(response);
+      gruff.currentCommand = null;
+      gruff.currentCommandName = null;
+    }
+    else if (status == "followup") {
+      gruff.statusMessage(commandLabel +
+        "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + prompt);
+      gruff.handleFollowup(response);
+    }
+    else { // success, failure, or error
+      if (command && !command.noStatusMessage)
+        gruff.statusMessage(commandLabel + " ==> " +
+          (status == "error" ? "Error: " : "") +
+          // This alternative shows "Failure:" when that is the status.
+          // (status == "success" ? "" : status.capitalizeWord() + ":  ")
+          response.data.message);
+      if (status == "success") {
+
+        // Handle the values returned by certain commands specially.
+
+        // Fetch store info and display it on the right side of the menu bar.
+        if (commandName == "fetchStoreInfo") { // 2016-09-13c
+          gruff.log("store info", data);
+          gruff.storeInfo = data;
+          var titleBar = document.getElementById("titleBar");
+          if (data.type == "endpoint") // 21oct16a
+            titleBar.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + data["store-name"];
+          else if (data.type == "ag3-store") // AG 3.3
+            titleBar.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + data["store-name"] +
+              "&nbsp;&nbsp;&nbsp;" + data["write-mode"] + "&nbsp;&nbsp;&nbsp;" +
+              (data["triple-count-string"] || "no") + " triples";
+          else // AG post-3.3
+            titleBar.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + data["store-name"] + 
+              "&nbsp;&nbsp;&nbsp;" + " in " + (data.catalog || "root") +
+              " at " + data.host + ":" + data.port + "&nbsp;&nbsp;&nbsp;" +
+              data["write-mode"] + "&nbsp;&nbsp;&nbsp;" +
+              (data["triple-count-string"] || "no") + " triples";
+        }
+        // If we just queried Gruff for the help string of a command,
+        // then store it on the menu item and display the string.
+        else if ((commandName == "fetchCommandHelpString") &&
+            gruff.highlightedCommand) {
+          gruff.highlightedCommand.helpString = data.message;
+          gruff.statusMessage(gruff.highlightedCommand.helpString);
+        };
+      }
+      else if (status == "error")
+        data.error = true;
+      if (data.warning || data.error)
+        gruff.showMessageDialog(data);
+      gruff.currentCommand = null;
+      gruff.currentCommandName = null;
+    };
+  },
+
+  // Handle a new layout from Gruff.
+  handleLayout: function(response) {
+    gruff.log("new layout");
+    gruff.layoutPrev = gruff.layout; // 2017-04-12a
+    gruff.layout = response.data;
+    var canvas = gruff.nodePane.canvas,
+      layoutCanvas = gruff.layout.canvas,
+      context = canvas.getContext("2d"),
+      lines;
+    gruff.selectedNodeName = layoutCanvas.selectedNodeName;
+    gruff.nodeFontHeight = layoutCanvas.nodeFontHeight;
+    gruff.nodeLineHeight = layoutCanvas.nodeLineHeight;
+    gruff.linkFontHeight = layoutCanvas.linkFontHeight;
+    context.font = gruff.nodeFontHeight + "px Sans-Serif";
+    gruff.layout.nodes.forEach(function(node) {
+      node.longString = node.ntriplesString.removeAngleBrackets();
+      node.centerX = node.x + Math.floor(node.width / 2);
+      node.centerY = node.y + Math.floor(node.height / 2);
+      if (node.string)
+        node.string = node.string.fixBackslashQuotes();
+      lines = node.lines;
+      if (lines) {
+        lines.forEach(function(line) {
+          line.string = line.string.fixBackslashQuotes();
+          line.width = context.measureText(line.string).width;
+        });
+      };
+    });
+    gruff.layout.links.forEach(function(link) {
+      link.fromNode = gruff.findNodeFromName(link.from);
+      link.toNode = gruff.findNodeFromName(link.to);
+    });
+
+    // Make the GruffJS canvas match the page size of Gruff's canvas.
+    canvas.width = layoutCanvas.width;
+    canvas.height = layoutCanvas.height;
+    gruff.nodePane.scrollLeft = layoutCanvas.centerX -
+      Math.floor(nodePane.clientWidth / 2);
+    gruff.nodePane.scrollTop = layoutCanvas.centerY -
+      Math.floor(nodePane.clientHeight / 2);
+
+    // Slide each node linearly from the previous layout state to the new one.
+    if (gruff.animateLayouts && gruff.layoutPrev && // 2017-04-12a
+        gruff.currentCommand.animate) {
+      var nodePrev, startNode;
+      gruff.layout.nodes.forEach(function(node) {
+        node.xNew = node.x;
+        node.yNew = node.y;
+        nodePrev = gruff.findNodeFromName(node.name, gruff.layoutPrev);
+        startNode = nodePrev;
+
+        // If this node was not in the previous layout, then try
+        // sliding it from one of its linked nodes, as in the F command
+        // to make the linked nodes emanate from the starting node.
+        if (!startNode) {
+          var linkNames = node && node.links,
+              linkName = linkNames && linkNames[0],
+              link = linkName && gruff.findLinkFromName(linkName);
+          if (link)
+            startNode = gruff.otherNode(link, node);
+        }
+        node.xOld = startNode ? startNode.x : node.x;
+        node.yOld = startNode ? startNode.y : node.y;
+      });
+      gruff.slidingStep = 0;
+      requestAnimationFrame(gruff.slideNodes);
+    }
+    else gruff.invalidateNodePane();
+  },
+
+  slideNodes: function() { // 2017-04-12a
+    var steps = gruff.slidingSteps;
+    gruff.layout.nodes.forEach(function(node) {
+      node.x = node.xOld + ((gruff.slidingStep * (node.xNew - node.xOld)) / steps);
+      node.y = node.yOld + ((gruff.slidingStep * (node.yNew - node.yOld)) / steps);
+      node.centerX = node.x + Math.floor(node.width / 2);
+      node.centerY = node.y + Math.floor(node.height / 2);
+    });
+    gruff.slidingStep++;
+    var keepGoing = (gruff.slidingStep <= gruff.slidingSteps);
+    gruff.drawNodePane(null, keepGoing);
+
+    // To animate in a busy loop, our requestAnimationFrame function
+    // must call itself, or else it will only get called once at the end.
+    if (keepGoing)
+      requestAnimationFrame(gruff.slideNodes);
+  },
+
+  // ----------------
+  // Followup Dialogs
+  // ----------------
+
+  // Handle a followup response from Gruff to prompt the user
+  // for more information to send back to Gruff.
+  handleFollowup: function(followup) {
+    gruff.log("new followup", followup);
+    var data = followup.data,
+      style = data.style;
+    gruff.currentFollowupID = data.id;
+    if (style == "string")
+      gruff.showStringDialog(data);
+    else if ((style == "single-choice") || (style == "multiple-choice"))
+      gruff.showChoiceList(data);
+    else if (style == "link-to-node")
+      gruff.dragLineFromNode(data);
+  },
+
+  // Show the string entry dialog.
+  showStringDialog: function(data) {
+    var dialog = document.getElementById("stringDialog"),
+      promptWidget = dialog.querySelector("#stringPrompt"),
+      // Convert JS \n newlines into HTML <br> newlines.
+      prompt = data.prompt.replace(/\n/gi, "<br>");
+    promptWidget.innerHTML = prompt;
+    var stringEntry = dialog.querySelector("#stringEntry");
+    stringEntry.value = "";
+    gruff.elementForEnter = dialog.querySelector("#stringDialogOKButton");
+    gruff.showDialog(dialog);
+    promptWidget.scrollTop = 0; // must be done *after* showing the dialog
+
+    // Setting the right edge to 16 pixels from the right edge of the
+    // parent doesn't work for an input field like stringEntry, so
+    // set it dynamically after finding out how big the parent is.
+    // Unfortunately it doesn't work to set the width before
+    // making the dialog visible.  And documents say that for input
+    // fields, the width attribute is used only for images, but it
+    // seems to work.
+    stringEntry.style.width = (dialog.clientWidth - 32);
+
+    stringEntry.focus(); // must be done *after* showing the dialog
+  },
+
+  // Handle a click of the string dialog's OK button.
+  stringDialogOKClick: function(event) {
+    this.invoke();
+  },
+
+  // Send the user's string entry dialog input back to Gruff.
+  stringDialogOKInvoke: function() {
+    var dialog = this.parentNode,
+      stringWidget = dialog.querySelector("#stringEntry"),
+      string = stringWidget.value,
+      encodedString = encodeURIComponent(string);
+    gruff.log("OK in string dialog", string, encodedString);
+    gruff.hideAnyModal("noCancel");
+    gruff.showCurrentCommandInStatusBar();
+    gruff.sendRequestToGruff("followup?id=" + gruff.currentFollowupID +
+      "&string=" + string);
+  },
+  stringDialogCancelClick: function(event) {
+    gruff.hideAnyModal();
+  },
+
+  // Show the multiple-choice list dialog or single-choice momentary menu.
+  showChoiceList: function(data) {
+    var multiple = data.style == "multiple-choice",
+      // For now a single-choice list is always momentary,
+      // but leave the door open for it not to be momentary,
+      // such as if a long prompt string is important.
+      choices = data.choices,
+      numChoices = choices.length,
+      momentary = (!multiple) && numChoices <= 26,
+      dialogName = momentary ? "popUpMenu" : "choiceListDialog",
+      dialog = document.getElementById(dialogName),
+      itemList = momentary ? dialog :
+        dialog.querySelector("#choiceListDialogItemList"),
+      promptWidget = (!momentary) && dialog.querySelector("#choicePrompt"),
+      lettered = momentary && numChoices <= 26,
+      letterCode = 97,
+      listItem, label, letter;
+    if (promptWidget)
+      promptWidget.innerHTML = data.prompt;
+    itemList.allowMultipleChoices = multiple;
+    while (itemList.firstChild) {
+      itemList.removeChild(itemList.firstChild);
+    };
+    if (momentary) {
+      itemList.momentary = true;
+      var nodePane = gruff.nodePane,
+        scrollTop = nodePane.scrollTop,
+        scrollLeft = nodePane.scrollLeft,
+        menuPosition = data["menu-position"],
+        left = (menuPosition && menuPosition.left) || scrollLeft + 200,
+        top = (menuPosition && menuPosition.top) || scrollTop + 100,
+
+        // Approximate the height of the menu (font is 14px)
+        // and keep it from going off the bottom of the screen.
+        // Unclear why the fudge factor of 22 needs to be 8 greater
+        // on Firefox than the font size, or 20 on Chrome.
+        nodePaneHeight = nodePane.offsetHeight,
+        menuHeight = (choices.length * 22),
+        offBottom = (top - scrollTop + menuHeight) - nodePaneHeight;
+      if (offBottom > 0) {
+        top -= offBottom;
+
+        // Also place the menu to the right of the node to avoid covering it.
+        // Plus an offset of 12 is harcoded in object-menu-position.
+        var selectedNode = gruff.findSelectedNode();
+        if (selectedNode)
+          left += selectedNode.width + 13;
+      };
+      itemList.style.left = gruff.paneToWindowX(nodePane, left);
+      itemList.style.top = gruff.paneToWindowY(nodePane, top);
+    }
+    else // not momentary
+      gruff.elementForEnter = dialog.querySelector("#choiceListDialogOKButton");
+    itemList.lettered = lettered;
+    var dividerAbove = false,
+      prevItem = null;
+    choices.forEach(function(choice) {
+      if (choice.label == "---") {
+        dividerAbove = true;
+        if (prevItem)
+          prevItem.classList.add("dividerBelow");
+      }
+      else {
+        listItem = document.createElement("li");
+        listItem.className = "listItem";
+        listItem.id = choice.value; // itemValue is not settable
+        listItem.comment = choice.comment || choice.value.removeAngleBrackets();
+        listItem.onmousedown = gruff.listItemMouseDown;
+        listItem.onmouseenter = gruff.listItemMouseEnter;
+        listItem.onmouseout = gruff.listItemMouseOut;
+        label = choice.label;
+        if (lettered) {
+          letter = String.fromCharCode(letterCode);
+          listItem.shortcutLetter = letter;
+          label = letter + "&nbsp;&nbsp;&nbsp;" + label;
+          letterCode++;
+        };
+        listItem.innerHTML = label;
+        if (momentary) {
+          listItem.onmouseup = gruff.momentaryChoiceListItemMouseUp;
+          listItem.invoke = gruff.momentaryChoiceListItemInvoke;
+        };
+        if (choice.selected) {
+          listItem.selected = true;
+          gruff.updateListItemSelectedAndFocusedStyle(listItem);
+        }
+        itemList.appendChild(listItem);
+        if (dividerAbove) {
+          dividerAbove = false;
+          listItem.classList.add("dividerAbove");
+        };
+      };
+      prevItem = listItem;
+    });
+    gruff.showDialog(dialog);
+    itemList.scrollTop = 0; // must be done *after* showing the dialog
+    if (!momentary) promptWidget.scrollTop = 0;
+
+    // This focus() method requires that the dialog first be exposed.
+    // But even then it works only sometimes, such as in Firefox when
+    // there are enough list items to require scrolling apparently,
+    // and never(?) in Chrome.  Otherwise the <body> is the activeElement
+    // after trying to focus on the item list.  So punt on using the
+    // official focus, and make the global keydown handler direct the
+    // keydown to the element that *should* have the focus, which we
+    // store in gruff.currentFocus.
+    // Update: This focus() call is still needed to allow the
+    // defualt keyboard behavior to work, in particular using
+    // PageUp and PageDown to scroll the list.
+    itemList.focus();
+    gruff.currentFocus = itemList;
+    itemList.focusIndex = -1;
+    itemList.focusItem = null;
+  },
+
+  momentaryChoiceListItemMouseUp: function(event) {
+    this.invoke();
+  },
+
+  momentaryChoiceListItemInvoke: function() {
+    gruff.log("momentaryChoiceListItemInvoke", this);
+    gruff.returnChoiceStringToGruff(encodeURIComponent(this.id), "choice");
+  },
+
+  // Send the user's choice list dialog input back to Gruff.
+  choiceListDialogOKClick: function(event) {
+    this.invoke()
+  },
+
+  choiceListDialogOKInvoke: function() {
+    var dialog = this.parentNode,
+      choiceList = dialog.querySelector("#choiceListDialogItemList");
+    gruff.log("OK in choice dialog", choiceList);
+    gruff.returnChoicesToGruff(choiceList);
+  },
+
+  choiceListDialogCancelClick: function(event) {
+    gruff.hideAnyModal();
+  },
+
+  // Return choices from the choice list dialog to Gruff.
+  returnChoicesToGruff: function(choiceList) {
+    var multiple = choiceList.allowMultipleChoices,
+      typeString = multiple ? "choices" : "choice";
+    gruff.log("returnChoicesToGruff", choiceList);
+    var choiceString = "";
+    for (var j=0; j < choiceList.childElementCount; ++j) {
+      var item = choiceList.childNodes[j];
+      if (item.selected) {
+        if (choiceString)
+          choiceString = choiceString + encodeURIComponent(",");
+        choiceString = choiceString + encodeURIComponent(item.id);
+      if (!multiple) break;
+      };
+    };
+    gruff.returnChoiceStringToGruff(choiceString, typeString);
+  },
+
+  // Return a string for any single-choice or multiple-choice to Gruff.
+  returnChoiceStringToGruff: function(choiceString, typeString) {
+    gruff.hideAnyModal("noCancel");
+    gruff.showCurrentCommandInStatusBar();
+    gruff.sendRequestToGruff("followup?id=" + gruff.currentFollowupID +
+      "&" + typeString + "=" + choiceString);
+  },
+
+  // Show the message dialog.
+  // Maybe use for up to four button choices later.
+  showMessageDialog: function(data) {
+    var dialog = document.getElementById("messageDialog"),
+      iconWidget = dialog.querySelector("#messageDialogIcon"),
+      messageWidget = dialog.querySelector("#dialogMessage"),
+      okButton = dialog.querySelector("#messageDialogOKButton"),
+      cancelButton = dialog.querySelector("#messageDialogCancelButton"),
+      // Convert JS \n newlines into HTML <br> newlines.
+      message = data.message.replace(/\n/gi, "<br>");
+    gruff.log("showMessageDialog", message);
+    if (data.warning) iconWidget.src = "\warning.png";
+    else if (data.error) iconWidget.src = "\error.png";
+    else iconWidget.src = "\info.png";
+    if (data.warning)
+      message = message +
+        "<br><br><br><br>(These warning dialogs can be turned off with " +
+        "Options | Show Warnings in Dialog.  The messages will still " +
+        "appear in the status bar.)";
+    cancelButton.style.display = "none"; // future expansion
+    messageWidget.innerHTML = message;
+    gruff.elementForEnter = okButton;
+    gruff.showDialog(dialog);
+    messageWidget.scrollTop = 0; // must be done *after* showing the dialog
+    okButton.focus(); // must be done *after* showing the dialog
+  },
+
+  // Handle a click of the message dialog's OK button.
+  messageDialogOKClick: function(event) {
+    this.invoke();
+  },
+
+  // Handle any future functionality of the message dialog's
+  // OK button, such as expanding it handle up to four choices.
+  messageDialogOKInvoke: function() {
+    gruff.log("OK in message dialog");
+    gruff.hideAnyModal("noCancel");
+    gruff.showCurrentCommandInStatusBar();
+  },
+  messageDialogCancelClick: function(event) {
+    gruff.hideAnyModal();
+  },
+
+  // --------------------
+  // Mouse Event Handlers
+  // --------------------
+
+  // Find the node that was clicked, if any, and select it.
+  nodePaneMouseDown: function(event) {
+    this.focus();
+
+    // Find the mouse position relative to the top left of the
+    // canvas.  The layerX and layerY properties hold these
+    // values already (except for the scrolling adjustment),
+    // but those properties are deprecated(!).
+    var x = gruff.windowToPaneX(this, event.clientX),
+      y = gruff.windowToPaneY(this, event.clientY),
+      shift = event.shiftKey,
+      control = event.ctrlKey,
+      alt = event.altKey,
+      node = gruff.nodeUnderMouse,
+      nodeName = node && node.name;
+    gruff.log("nodePaneMouseDown", event, 
+      event.clientX, event.clientY, x, y, node);
+    if (control && alt && !shift)
+      gruff.sendCommandToGruff("zoomInAroundTheMouse");
+    else if (!this.dragging && (nodeName != gruff.selectedNodeName)) {
+      gruff.selectedNodeName = nodeName;
+      gruff.sendCommandToGruff("selectNode", "node=" + (nodeName || "nil"));
+      gruff.invalidateNodePane();
+    };
+    this.downObject = node;
+    this.downX = x;
+    this.downY = y;
+    this.dragX = x;
+    this.dragY = y;
+  },
+  nodePaneMouseUp: function(event) {
+    gruff.log("nodePaneMouseUp", event);
+    gruff.stopAnyDragging(this);
+  },
+  nodePaneMouseMove: function(event) {
+    var x = gruff.windowToPaneX(this, event.clientX),
+      y = gruff.windowToPaneY(this, event.clientY),
+      nodeUnderMouse = gruff.findNodeUnderPosition(x, y);
+    // gruff.log("nodePaneMouseMove", x, y, nodeUnderMouse, gruff.nodeUnderMouse);
+    this.mouseX = x;
+    this.mouseY = y;
+    if (nodeUnderMouse != gruff.nodeUnderMouse) {
+      if (gruff.nodeUnderMouse)
+        gruff.nodeMouseOut(gruff.nodeUnderMouse);
+      if (nodeUnderMouse)
+        gruff.nodeMouseEnter(nodeUnderMouse);
+      gruff.nodeUnderMouse = nodeUnderMouse;
+    };
+
+    // Initiate a drag.
+    // If the mouse button is down and we haven't yet started a drag
+    // and we've moved far enough from the mouse down position to
+    // indicate a drag, then initialize a drag.
+    if (!this.dragging && this.downX && this.downY &&
+        ((Math.abs(x - this.downX) >= 3) ||
+         (Math.abs(y - this.downY) >= 3))) {
+      var node = this.downObject;
+      this.dragType = node ? "node" : "scroll";
+      this.dragObject = node;
+
+      // When dragging a node, clear the arrow coordinates of each
+      // of its links so that the links will be drawn to the center
+      // of the node instead of to those cached coordinates, and
+      // so that the arrowheads will not be drawn during the drag.
+      if (node) {
+        node.links.forEach(function(linkName) {
+          var link = gruff.findLinkFromName (linkName);
+          if (link) {
+            link.arrow1 = null;
+            link.arrow2 = null;
+            link.labelCoords = null;
+          };
+        });
+      };
+      this.dragging = true;
+    };
+
+    // Do a dragging step.
+    if (this.dragging) {
+      var type = this.dragType,
+        object = this.dragObject,
+        dx = x - this.dragX,
+        dy = y - this.dragY;
+      gruff.log("dragging", x, y, dx, dy, this.dragType, this.dragObject);
+
+      // Dragging a node one step.
+      if (type == "node") {
+        object.x += dx;
+        object.y += dy;
+        object.centerX += dx; // 2017-04-12a
+        object.centerY += dy;
+        gruff.invalidateNodePane();
+      }
+
+      // Drag scrolling the canvas one step.
+      else if (type == "scroll") { // dragging the background
+        var layoutCanvas = gruff.layout.canvas;
+        gruff.log("dragging background", this,
+          this.scrollLeft, this.scrollTop, dx, dy);
+        if (dx !== 0) {
+          this.scrollLeft -= dx;
+          x -= dx;
+          layoutCanvas.centerX -= dx;
+        };
+        if (dy !== 0) {
+          this.scrollTop -= dy;
+          y -= dy;
+          layoutCanvas.centerY -= dy;
+        };
+      }
+
+      // Dragging a rubber band line to a second node one step.
+      else if (type == "linkToNode") {
+        gruff.invalidateNodePane();
+      };
+      this.dragX = x;
+      this.dragY = y;
+    };
+  },
+  nodePaneMouseOut: function(event) {
+    gruff.log("nodePaneMouseOut", this, this.dragging);
+
+    // This ensures that dragging is stopped if the user releases
+    // the mouse button outside of the pane where dragging was done.
+    gruff.stopAnyDragging(this);
+  },
+  stopAnyDragging: function(pane) {
+    gruff.log("stopAnyDragging");
+    if (pane.dragging) {
+      if (pane.dragType == "node") {
+        var node = pane.dragObject,
+          zoomDivisor = gruff.layout.canvas.zoomDivisor;
+        gruff.sendCommandToGruff("moveSelectedNode",
+          "center-x=" + (node.x + Math.floor(node.width / 2)) * zoomDivisor +
+          "&center-y=" + (node.y + Math.floor(node.height / 2)) * zoomDivisor
+        );
+      }
+      else if (pane.dragType == "linkToNode") {
+        pane.dragType = null;
+        gruff.invalidateNodePane(); // to erase the rubber band line
+        var toNode = gruff.nodeUnderMouse,
+          ntriplesString = toNode ? toNode.ntriplesString : "nil";
+        if (toNode)
+          gruff.statusMessage("Looking for triples between " +
+            gruff.selectedNodeName + " and " + toNode.label + " ...");
+        else gruff.statusMessage("Sending no second node to Gruff ...");
+        gruff.sendRequestToGruff("followup?id=" + gruff.currentFollowupID +
+          "&to-node=" + encodeURIComponent(ntriplesString));
+      };
+    };
+    pane.dragging = false;
+    pane.dragType = null;
+    pane.dragObject = null;
+    pane.downX = null;
+    pane.downY = null;
+  },
+  nodeMouseEnter: function(node) {
+    gruff.log("nodeMouseEnter", node);
+    // Redraw everything so that the node that's under the
+    // mouse cursor will have a thicker border.
+    gruff.invalidateNodePane();
+    // Remember that if we didn't trim the angle brackets here that
+    // they would need to be escaped before using in innerHTML.
+    gruff.statusMessage(node.longString);
+  },
+  nodeMouseOut: function(node) {
+    gruff.invalidateNodePane();
+    gruff.log("nodeMouseOut");
+    gruff.statusMessage("");
+  },
+  bodyMouseDown: function(event) {
+    gruff.log("bodyMouseDown", event);
+    // Hide any menu when clicking the background.
+    if (gruff.currentModal && gruff.currentModal.momentary) {
+      gruff.hideAnyModal();
+      gruff.modalsWereHidden = false;
+    };
+  },
+  menuBarItemMouseDown: function(event) {
+    gruff.log("menuBarItemMouseDown", this);
+    gruff.showDropDownMenu(this);
+    event.stopPropagation();
+    // Prevent the user from selecting part of the text
+    // in a pull-down menu title.
+    event.preventDefault();
+  },
+  menuBarItemMouseEnter: function(event) {
+    gruff.log("menuBarMouseEnter", this);
+    this.classList.add("menuBarItemFocused");
+
+    // If the mouse moves over a pull-down menu title
+    // and another pull-down menu is currently being
+    // shown, then hide that menu and show this one.
+    if (gruff.currentModal &&
+        gruff.currentModal.parentNode != this &&
+        gruff.currentModal.classList.contains("commandMenu")) {
+      gruff.hideAnyModal();
+      gruff.showDropDownMenu(this);
+    };
+    gruff.elementForEnter = this;
+  },
+  menuBarItemMouseOut: function(event) {
+    gruff.log("menuBarItemMouseOut", this);
+    this.classList.remove("menuBarItemFocused");
+    if (gruff.elementForEnter == this) {
+      gruff.elementForEnter = null;
+    };
+  },
+  menuItemMouseDown: function(event) {
+    gruff.log("menuItemMouseDown", this, event);
+    // Don't pass drop-down menuItem events up to the menu or menuBarItem.
+    event.stopPropagation();
+    // Prevent the user from selecting part of the text
+    // in a pull-down menuItem.
+    event.preventDefault();
+  },
+  menuItemMouseUp: function(event) {
+    gruff.log("menuItemMouseUp", this, event);
+    if (this.invoke) this.invoke();
+    event.stopPropagation();
+  },
+  commandMenuHide: function() {
+    var commandMenu = this,
+      parent = commandMenu.parentNode;
+    // If this commandMenu is a pull-down menu, then unhighlight
+    // its menuBarItem whenever hiding the pull-down menu.
+    if (parent && parent.classList && parent.classList.contains("menuBarItem"))
+      parent.classList.remove("menuBarItemFocused");
+    gruff.hide(commandMenu);
+  },
+  commandMenuItemInvoke: function() {
+    gruff.hideAnyModal();
+    gruff.sendCommandToGruff(this.id);
+  },
+  commandMenuItemShowHelpString: function() {
+    var commandName = this.id,
+     command = gruff.commands[commandName],
+     helpString = command.helpString;
+    if (helpString)
+      gruff.statusMessage(helpString);
+    else {
+      gruff.highlightedCommand = command;
+      gruff.sendCommandToGruff("fetchCommandHelpString",
+        "commandName=" + commandName);
+    };
+  },
+  menuItemMouseEnter: function(event) {
+    var menuItem = this,
+      menu = menuItem.parentNode;
+    gruff.log("defaultMenuItemMouseEnter", menuItem, menu);
+    gruff.focusOnListItem(menu, menuItem);
+
+    // It seems that the mouseOut event propagates to the
+    // parent menuBarItem (when there is one), but this
+    // mouseEnter event does not, so propagate it ourself
+    // to keep the menuBarItem highlighted while over
+    // its menu.
+    var menuParent = menu.parentNode;
+    if (menuParent.classList.contains("menuBarItem"))
+      menuParent.onmouseenter();
+  },
+  menuItemMouseOut: function(event) {
+    gruff.log("menuItemMouseOut", this);
+    gruff.unfocusOnListItem(this.parentNode, this);
+  },
+  dialogMouseDown: function(event) {
+    gruff.log("dialogMouseDown", this, event);
+
+    // Prevent clicking inside a modal dialog from hiding the dialog.
+    event.stopPropagation();
+  },
+
+  // Whenever the nodePane is scrolled (either by clicking a scrollbar
+  // or using keyboard shortcuts), send the new scroll position to Gruff.
+  nodePaneOnScroll: function(event) {
+    gruff.log("nodePaneOnScroll");
+    requestAnimationFrame(gruff.sendScrollPositionToGruff);
+  },
+
+  // Send the current NodePane scroll position to Gruff to keep it in sync.
+  sendScrollPositionToGruff: function() {
+    var pane = gruff.nodePane,
+      left = pane.scrollLeft,
+      top = pane.scrollTop;
+    gruff.sendCommandToGruff("scrollNodePane",
+      "center-x=" + (left + Math.floor(pane.clientWidth / 2)) +
+      "&center-y=" + (top + Math.floor(pane.clientHeight / 2))
+    );
+  },
+
+  // -----------------------
+  // Drawing Nodes and Links
+  // -----------------------
+
+  invalidateNodePane: function() {
+    requestAnimationFrame(gruff.drawNodePane);
+  },
+  drawNodePane: function(timestamp, sliding) {
+    var nodePane = gruff.nodePane,
+      canvas = nodePane.canvas,
+      layout = gruff.layout,
+      left = nodePane.scrollLeft,
+      top = nodePane.scrollTop,
+      right = left + nodePane.clientWidth,
+      bottom = top + nodePane.clientHeight,
+      simple = layout.canvas.zoomDivisor > 4,
+      x1, y1, x2, y2;
+
+    // Grab a graphics context, and go ahead and give it some
+    // attributes that will be used by all drawing in the node pane.
+    var context = canvas.getContext("2d");
+    context.textBaseline = "top";
+    context.textShadowColor = "none";
+    context.textShadowBlur = 0;
+    context.textShadowOffsetX = 0;
+    context.textShadowOffsetY = 0;
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    layout.links.forEach(function(link) {
+
+      // An optimization when dragging a node, to not draw links
+      // that are scrolled out of view.  See the node case below.
+      if (!nodePane.dragging ||
+          !(link.arrow1 && link.arrow2 &&
+            (x1 = link.arrow1[0]) && (y1 = link.arrow1[1]) &&
+            (x2 = link.arrow2[0]) && (y2 = link.arrow2[1]) &&
+            ((x1 <= left && x2 <= left) ||
+             (x1 >= right && x2 >= right) ||
+             (y1 <= top && y2 <= top) ||
+             (y1 >= bottom && y2 >= bottom)))) {
+        if (link.labelCoords && !sliding) // 2017-04-12a
+          gruff.drawLinkString(link, context);
+        gruff.drawLinkLine(link, context, sliding); // 2017-04-12a
+      };
+    });
+    layout.nodes.forEach(function(node) {
+
+      // An optimization when dragging a node, to not draw nodes
+      // that are scrolled out of view.  We don't need to do this
+      // when scrolling, for example, because everything is already
+      // drawn on the big canvas, and the node pane is simply
+      // moving the canvas across itself and not redrawing.
+      // (And that's why we *must* redraw stuff that's scrolled
+      // out of view in the general case.)  But we do need to
+      // redraw everything frequently when dragging a node.
+      if (!nodePane.dragging ||
+          (node.x + node.width > left &&
+           node.y + node.height > top &&
+           node.x < right &&
+           node.y < bottom)) {
+
+        if (simple)
+          gruff.drawSimpleNodeBox(node, context);
+        else {
+          gruff.drawNodeBox(node, context);
+          gruff.drawNodeString(node, context);
+        };
+      };
+    });
+    if (nodePane.dragType == "linkToNode")
+      gruff.drawRubberLine(nodePane);
+    gruff.drawLegend();
+  },
+  drawSimpleNodeBox: function(node, context) {
+    // For when zoomed out more than a few times.
+    var left = node.x, top = node.y,
+      width = node.width, height = node.height,
+      color = node.color,
+      red = parseInt(color.substr(1, 2), 16),
+      green = parseInt(color.substr(3, 2), 16),
+      blue = parseInt(color.substr(5, 2), 16),
+      darkerColor = "rgb("
+        + Math.max(0, red - 32) + ","
+        + Math.max(0, green - 32) + ","
+        + Math.max(0, blue - 32) + ")";
+    context.fillStyle = darkerColor;
+    context.fillRect(left, top, width, height);
+    // context.fill();
+  },
+  drawNodeBox: function(node, context) {
+    // A fancy box with gradient shading and rounded corners.
+    var left = node.x, top = node.y,
+      width = node.width, height = node.height,
+      right = left + width, bottom = top + height,
+      radius = 6,
+      underMouse = node == gruff.nodeUnderMouse,
+      selected = node.name && (node.name == gruff.selectedNodeName);
+    context.fillStyle = node.color;
+    context.strokeStyle = selected ? "red" : "#406080";
+    context.lineWidth = (selected || underMouse) ? 2 : 1;
+    context.beginPath();
+    context.moveTo(left + radius, top);
+    context.lineTo(right - radius, top);
+    context.quadraticCurveTo(right, top, right, top + radius);
+    context.lineTo(right, bottom - radius);
+    context.quadraticCurveTo(right, bottom, right - radius, bottom);
+    context.lineTo(left + radius, bottom);
+    context.quadraticCurveTo(left, bottom, left, bottom - radius);
+    context.lineTo(left, top + radius);
+    context.quadraticCurveTo(left, top, left + radius, top);
+    context.closePath();
+
+    // Gradient shading in node boxes.
+    var color = node.color,
+      red = parseInt(color.substr(1, 2), 16),
+      green = parseInt(color.substr(3, 2), 16),
+      blue = parseInt(color.substr(5, 2), 16),
+      topColor = "rgb(" + Math.round(red + (255 - red) * .40) + "," +
+        Math.round(green + (255 - green) * .40) + "," +
+        Math.round(blue + (255 - blue) * .40) + ")",
+      midTopColor = "rgb(" + Math.round(red + (255 - red) * .00) + "," +
+        Math.round(green + (255 - green) * .00) + "," +
+        Math.round(blue + (255 - blue) * .00) + ")",
+      midBottomColor = "rgb(" + Math.round(red * .90) + "," +
+        Math.round(green * .90) + "," + Math.round(blue * .90) + ")",
+      bottomColor = "rgb(" + Math.round(red * .70) + "," +
+        Math.round(green * .70) + "," + Math.round(blue * .70) + ")";
+    gradient = context.createLinearGradient(left, top, left, top + height);
+    gradient.addColorStop(0.0, topColor);
+    gradient.addColorStop(0.15, midTopColor);
+    gradient.addColorStop(0.85, midBottomColor);
+    gradient.addColorStop(1.0, bottomColor);
+    context.fillStyle = gradient;
+
+    context.fill();
+    context.stroke();
+  },
+  drawNodeString: function(node, context) {
+    var fontHeight = gruff.nodeFontHeight,
+      lineHeight = gruff.nodeLineHeight,
+      margin = lineHeight - fontHeight;
+    context.fillStyle = "black";
+    context.font = fontHeight + "px Sans-Serif";
+    // this 6 is 3 for the default label-margin of node-pane-mixin,
+    // plus 1 for the border (jj need to pass those from Gruff),
+    // and another 2 for *extra-horizontal-node-label-margin*
+    var usingChrome = gruff.webBrowser == "Chrome",
+      padding = usingChrome ? 4 : 6
+      left = node.x,
+      exteriorWidth = node.width,
+      interiorWidth = exteriorWidth - 2 * padding,
+      lines = node.lines;
+    if (!lines) {
+      var string = node.label;
+      if (string == "null") return; // such as when zoomed out
+      lines = gruff.splitStringToWidth(string, interiorWidth, context);
+      node.lines = lines;
+    };
+    var numLines = lines.length,
+      textHeight = numLines * fontHeight + (numLines - 1) * margin;
+      y = node.y + ((node.height - textHeight) / 2);
+    if (usingChrome) y += -1;
+    else if (gruff.webBrowser == "Safari") y += -2; // 2016-11-11b
+    lines.forEach(function(line) {
+      context.fillText(line.string,
+        left + padding + (interiorWidth - line.width) / 2, y);
+      y += lineHeight;
+    });
+  },
+  drawLinkLine: function(link, context, sliding) {
+    var fromNode = link.fromNode,
+      toNode = link.toNode,
+      fromCenterX = fromNode.centerX, // 2017-04-12a
+      fromEdgeX = (!sliding) && link.arrow1 && link.arrow1[0], // 2017-04-12a
+      fromX = fromEdgeX || fromCenterX,
+      fromCenterY = fromNode.centerY,
+      fromEdgeY = (!sliding) && link.arrow1 && link.arrow1[1],
+      fromY = fromEdgeY || fromCenterY,
+      toCenterX = toNode.centerX,
+      toEdgeX = (!sliding) && link.arrow2 && link.arrow2[0],
+      toX = toEdgeX || toCenterX,
+      toCenterY = toNode.centerY,
+      toEdgeY = (!sliding) && link.arrow2 && link.arrow2[1],
+      toY = toEdgeY || toCenterY,
+      dashing = (link.dashing == "dashed") ? [8] : [],
+      offsets = link.offsets,
+      zoomDivisor = gruff.layout.canvas.zoomDivisor,
+      arrowhead;
+    context.lineWidth = zoomDivisor > 1 ? 1 : link.thickness;
+    context.strokeStyle = link.color || "black";
+    context.fillStyle = link.color || "black";
+    context.setLineDash(dashing);
+    context.beginPath();
+    context.moveTo(fromX, fromY);
+    if (offsets.orientation1 == "horizontal")
+      context.lineTo(fromX, fromCenterY + offsets.y1 / zoomDivisor);
+    else if (offsets.orientation1 == "vertical")
+      context.lineTo(fromCenterX + offsets.x1 / zoomDivisor, fromY);
+    if (offsets.x1 !== 0 || offsets.y1 !== 0)
+      context.lineTo(fromCenterX + offsets.x1 / zoomDivisor,
+                     fromCenterY + offsets.y1 / zoomDivisor);
+    if (offsets.x2 !== 0 || offsets.y2 !== 0)
+      context.lineTo(toCenterX + offsets.x2 / zoomDivisor,
+                     toCenterY + offsets.y2 / zoomDivisor);
+    if (offsets.orientation2 == "horizontal")
+      context.lineTo(toX, toCenterY + offsets.y2 / zoomDivisor);
+    else if (offsets.orientation2 == "vertical")
+      context.lineTo(toCenterX + offsets.x2 / zoomDivisor, toY);
+    context.lineTo(toX, toY);
+    context.stroke();
+    if (!sliding) { // 2017-04-12a
+      [1, 2].forEach(function(index) {
+        arrowhead = link["arrow" + index];
+        if (arrowhead) {
+          context.beginPath();
+          context.moveTo(arrowhead[2], arrowhead[3]);
+          context.lineTo(arrowhead[4], arrowhead[5]);
+          context.lineTo(arrowhead[6], arrowhead[7]);
+          context.closePath();
+          context.fill();
+          context.stroke();
+        };
+      });
+    };
+  },
+  drawLinkString: function(link, context) {
+    var fontHeight = gruff.linkFontHeight;
+    context.fillStyle = link.color || "black";
+    context.font = fontHeight + "px Sans-Serif";
+    link.labelCoords.forEach(function(entry) {
+      var angle = entry.angle;
+      if (angle) {
+        context.save();
+        context.translate(entry.x, entry.y);
+        context.rotate(angle);
+        context.translate(-entry.x, -entry.y);
+      };
+      // Without the +2 here, the label is too close to the line.
+      context.fillText(entry.string, entry.x, entry.y + 2);
+      if (angle)
+        context.restore();
+    });
+  },
+  drawLegend: function() {
+    var legendPane = gruff.legend,
+      canvas = legendPane.canvas,
+      context = canvas.getContext("2d"),
+      layout = gruff.layout,
+      fontHeight = gruff.linkFontHeight,
+      margin = 10,
+      width = legendPane.clientWidth,
+      right = width - margin,
+      spacing = 12,
+      halfSpacing = Math.floor(spacing / 2),
+      gap = 3 * margin,
+      y = gap;
+
+    // Must compute and set the height of the scrolling legend
+    // before drawing anything, because setting the height
+    // would erase what was drawn otherwise.
+    canvas.height = (3 * gap) +
+      (layout.legendLinks.length *
+        (spacing + fontHeight + 6)) +
+      (layout.legendNodes.length *
+        (halfSpacing + fontHeight + 10));
+
+    // Set the canvas width only after setting the height so
+    // that it matches whether the vertical scrollbar is there.
+    // jj Except that the scrollbar state apparently is not up-to-date yet.
+    canvas.width = canvas.parentNode.clientWidth;
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.font = fontHeight + "px Sans-Serif";
+    context.textBaseline = "top";
+    context.textShadowColor = "none";
+    context.textShadowBlur = 0;
+    context.textShadowOffsetX = 0;
+    context.textShadowOffsetY = 0;
+
+    // Draw the legend's link predicate entries.
+    layout.legendLinks.forEach(function(link) {
+      y += halfSpacing;
+      link.top = y;
+      context.strokeStyle = "black";
+      context.fillStyle = "black";
+      if (gruff.webBrowser == "Chrome") y += -1;
+      context.fillText(link.label, margin + 4, y);
+      if (gruff.webBrowser == "Chrome") y += 1;
+      y += fontHeight + 4;
+      context.lineWidth = link.thickness;
+      context.strokeStyle = link.color || "black";
+      context.fillStyle = link.color || "black";
+      context.dashing = (link.dashing == "dashed") ? [8] : [];
+      context.beginPath();
+      context.moveTo(margin, y);
+      context.lineTo(right - 2, y);
+      context.stroke();
+
+      // Arrowheads in the legend.
+      context.beginPath();
+      context.moveTo(right - 2, y);
+      context.lineTo(right - 10, y - 4);
+      context.lineTo(right - 10, y + 4);
+      context.closePath();
+      context.fill();
+      context.stroke();
+
+      y += halfSpacing + 2;
+      link.bottom = y;
+    });
+
+    // Draw the legend's node type entries.
+    y += gap;
+    layout.legendNodes.forEach(function(node) {
+      node.x = margin;
+      node.y = y;
+      node.width = context.measureText(node.label).width + 12;
+      node.height = fontHeight + 8;
+      gruff.drawNodeBox(node, context);
+      gruff.drawNodeString(node, context);
+      y += node.height + halfSpacing + 2;
+    });
+  },
+
+  // --------------
+  // Initialization
+  // --------------
+
+  onload: function() {
+
+    // Cache the host and port where Gruff's HTTP server is running
+    // and from which we downloaded this file, in order to send
+    // Gruff commands to that same host and port.
+    gruff.host = window.location.hostname;
+    gruff.port = window.location.port;
+    gruff.webBrowser = gruff.whichWebBrowser();
+
+    window.onresize = gruff.resize;
+    gruff.body = document.getElementById("body");
+    gruff.menuBar = document.getElementById("menuBar");
+    gruff.statusBar = document.getElementById("statusBar");
+    gruff.nodePane = document.getElementById("nodePane");
+    gruff.nodePane.canvas = document.getElementById("nodePaneCanvas");
+    gruff.body.onmousedown = gruff.bodyMouseDown;
+    gruff.nodePane.onmousedown = gruff.nodePaneMouseDown;
+    gruff.nodePane.onmouseup = gruff.nodePaneMouseUp;
+    gruff.nodePane.onmousemove = gruff.nodePaneMouseMove;
+    gruff.nodePane.onmouseout = gruff.nodePaneMouseOut;
+    gruff.nodePane.dragging = false;
+    gruff.nodePane.onscroll = gruff.nodePaneOnScroll;
+    gruff.legend = document.getElementById("legend");
+    gruff.legend.canvas = document.getElementById("legendCanvas");
+
+    // Attach some event handlers to particular widgets.
+    // Not doing this in the HTML for those widgets, because I haven't found
+    // a way to get the event object that way.
+    var stringDialogOKButton = document.getElementById
+        ("stringDialogOKButton"),
+      stringDialogCancelButton = document.getElementById
+        ("stringDialogCancelButton");
+    stringDialogOKButton.onclick = gruff.stringDialogOKClick;
+    stringDialogOKButton.invoke = gruff.stringDialogOKInvoke;
+    stringDialogCancelButton.onclick = gruff.stringDialogCancelClick;
+
+    var choiceListDialogItemList = document.getElementById
+        ("choiceListDialogItemList"),
+      choiceListDialogOKButton = document.getElementById
+        ("choiceListDialogOKButton"),
+      choiceListDialogCancelButton = document.getElementById
+        ("choiceListDialogCancelButton");
+    choiceListDialogItemList.gruffkeydown = gruff.itemListKeyDown;
+    choiceListDialogItemList.onscroll = gruff.itemListOnScroll;
+    choiceListDialogOKButton.onclick = gruff.choiceListDialogOKClick;
+    choiceListDialogOKButton.invoke = gruff.choiceListDialogOKInvoke;
+    choiceListDialogCancelButton.onclick = gruff.choiceListDialogCancelClick;
+
+    var messageDialogOKButton = document.getElementById
+        ("messageDialogOKButton"),
+      messageDialogCancelButton = document.getElementById
+        ("messageDialogCancelButton");
+    messageDialogOKButton.onclick = gruff.messageDialogOKClick;
+    messageDialogOKButton.invoke = gruff.messageDialogOKInvoke;
+    messageDialogCancelButton.onclick = gruff.messageDialogCancelClick;
+
+    var popUpMenu = document.getElementById("popUpMenu");
+    popUpMenu.gruffkeydown = gruff.itemListKeyDown;
+    popUpMenu.onscroll = gruff.itemListOnScroll;
+
+    // Fill in the menu bar with commands from gruff.commands,
+    // arranged according to the gruff.menuBarCommands tree.
+    // In the outer loop, make each entry for the menu bar.
+    var menuBar = document.getElementById("menuBar");
+    gruff.menuBarCommands.forEach(function(menuBarItemEntry) {
+      var menuBarItem = document.createElement("li"),
+        menu = document.createElement("ul");
+      menuBarItem.className = "menuBarItem";
+      menuBarItem.innerHTML = menuBarItemEntry.name;
+      menuBarItem.accessKey = menuBarItemEntry.accessKey;
+
+      // Remember that I'm setting onmousefoo properties instead of using
+      // the preferred addEventListener so that the global keyboard shortcut
+      // handler can find the method and call it.
+      menuBarItem.onmousedown = gruff.menuBarItemMouseDown;
+      menuBarItem.onmouseenter = gruff.menuBarItemMouseEnter;
+      menuBarItem.onmouseout = gruff.menuBarItemMouseOut;
+      menuBar.appendChild(menuBarItem);
+      menu.className = "commandMenu";
+      menu.momentary = true;
+      menu.gruffkeydown = gruff.itemListKeyDown;
+      menu.hide = gruff.commandMenuHide;
+      menuBarItem.appendChild(menu);
+
+      // In the inner loop, make each menu item for one pull-down menu.
+      var dividerAbove = false,
+        prevItem = null;
+      menuBarItemEntry.commands.forEach(function(commandName) {
+        if (commandName == "---") {
+          dividerAbove = true;
+          if (prevItem)
+            prevItem.classList.add("dividerBelow");
+        }
+        else {
+          var command = gruff.commands[commandName],
+            menuItem = document.createElement("li");
+          gruff.log("create menu item", menuBarItemEntry.commands, commandName);
+          menuItem.className = "listItem";
+          menuItem.id = commandName;
+          menuItem.onmousedown = gruff.menuItemMouseDown;
+          menuItem.onmouseup = gruff.menuItemMouseUp;
+          menuItem.onmouseenter = gruff.menuItemMouseEnter;
+          menuItem.onmouseout = gruff.menuItemMouseOut;
+          menuItem.showHelpString = gruff.commandMenuItemShowHelpString;
+          menuItem.invoke = gruff.commandMenuItemInvoke;
+          var menuItemLabel = command.label,
+            shortcut = command.shortcut;
+          if (shortcut)
+            menuItemLabel = menuItemLabel +
+              "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + 
+              gruff.shortcutLabel(command.shortcut);
+          menuItem.innerHTML = menuItemLabel;
+          menu.appendChild(menuItem);
+          if (dividerAbove) {
+            gruff.log("add menu divider");
+            dividerAbove = false;
+            menuItem.classList.add("dividerAbove");
+          };
+
+          // For each command that we add to the menu bar, add an entry to
+          // the shortcuts array that maps keyboard shortcuts to commands.
+          // Extract that mapping from the master commands array that
+          // maps each command to its shortcut and other things.
+          var shortcut = (command.shortcut);
+          if (shortcut) {
+            gruff.shortcuts[
+              shortcut.alt ? "alt" : "noAlt"][
+              shortcut.control ? "control" : "noControl"][
+              shortcut.shift ? "shift" : "noShift"][
+              shortcut.key] = commandName;
+          };
+          prevItem = menuItem;
+        };
+      });
+    });
+    // Add a title bar area at the end of the menu bar.
+    var titleBar = document.createElement("li"); // 2016-09-16c
+    titleBar.className = "titleBar";
+    titleBar.id = "titleBar";
+    titleBar.innerHTML = "";
+    menuBar.appendChild(titleBar);
+
+    // ------------------------------------
+    // The global keyboard shortcut handler
+    // ------------------------------------
+
+    addEventListener("keypress", function(event) {
+      gruff.log("keypress top", gruff.currentModal, event);
+
+      // The keypress handler is for characters that are interpreted
+      // from keydown events.  This event can come in well after
+      // the earlier keydown event is handled, so to avoid entering
+      // a character into a text widget for a keydown event that
+      // was handled as a command shortcut, we must set a flag
+      // in the keydown handler to say that the most recent keydown
+      // was a command shortcut, and then use that flag here to
+      // prevent the default handling of the keydown as a character.
+      if (gruff.shortcutWasPressed) {
+        gruff.log("suppress keypress after shortcut", event);
+        gruff.shortcutWasPressed = false;
+        event.preventDefault();
+        event.stopPropagation();
+      };
+    }),
+    addEventListener("keydown", function(event) {
+      var key = gruff.keyDownName(event),
+        modal = gruff.currentModal,
+        nodePane = gruff.nodePane,
+        shift = event.shiftKey, control = event.ctrlKey, alt = event.altKey;
+      gruff.log("keydown top", gruff.currentFocus, modal,
+        event, key, document.activeElement);
+      gruff.shortcutWasPressed = false;
+
+      // Show a drop-down menu with its Alt-Foo access key,
+      // unless there's a non-momentary modal dialog present.
+      if (alt && !shift && !control && (!modal || modal.momentary)) {
+        var menuBarItems = gruff.menuBar.childNodes,
+          numItems = menuBarItems.length,
+          menuBarItem;
+        for (var index = 0; index < numItems; ++index) {
+          menuBarItem = menuBarItems[index];
+          if (key == menuBarItem.accessKey) {
+            gruff.showDropDownMenu(menuBarItem, false, true);
+            // This prevents Alt-D from moving the focus to the URL widget
+            // in Firefox, for example, which can also be done with Control-L.
+            // jj But it's not preventing Alt-V from also showing Firefox's
+            // View menu, and adding a call to StopPropagation does not help.
+            // event.stopPropagation(); // no help
+            event.preventDefault();
+            return;
+          };
+        };
+      }
+      else if (modal) {
+
+        // Handle the Enter key for any modal dialog or menu.
+        if (key == "Enter") {
+          var element = gruff.elementForEnter;
+          if (element && element.invoke) {
+            gruff.log("Enter was pressed", element, element.invoke);
+            element.invoke();
+          };
+        }
+        // Handle the Escape key for any modal dialog or menu.
+        else if (key == "Escape") {
+          gruff.hideAnyModal();
+        }
+        // If it's a lettered menu, then let the user type
+        // a letter to select a choice.
+        else if (modal.lettered) {
+          var choices = modal.childNodes,
+            numChoices = choices.length,
+            choice;
+          for (var index = 0; index < numChoices; ++index) {
+            choice = choices[index];
+            if (choice.shortcutLetter == key) {
+              choice.invoke();
+              return;
+            };
+          };
+        }
+        // If it's a pull-down menu, then make the left and right
+        // arrow keys show the previous or next menu of the menu bar.
+        else if (key == "ArrowLeft" || key == "ArrowRight") {
+          if (modal.parentNode.classList.contains("menuBarItem")) {
+            var menuBarItem = modal.parentNode,
+              menuBar = menuBarItem.parentNode,
+              index = gruff.listItemIndex(menuBar, menuBarItem),
+              increment = key == "ArrowLeft" ? -1 : 1,
+              newIndex = index + increment,
+              newMenuBarItem = menuBar.childNodes[newIndex];
+            gruff.log("showSiblingPullDown", modal, menuBarItem,
+              menubar, index, increment, newIndex, newMenuBarItem);
+            if (newMenuBarItem && newMenuBarItem.classList &&
+                newMenuBarItem.classList.contains("menuBarItem"))
+              gruff.showDropDownMenu(newMenuBarItem, false, true);
+            event.stopPropagation(); // 2016-09-12c
+            return;
+          };
+        };
+        // If our call to focus() failed, then default to invoking the keydown
+        // method of the element that we know should have the keyboard focus.
+        if (gruff.currentFocus && gruff.currentFocus.gruffkeydown) {
+          gruff.log("invoke gruffkeydown of", gruff.currentFocus);
+          gruff.currentFocus.gruffkeydown(event);
+        };
+        return;   // Exit after handling the modal dialog case.
+      };
+      // Hardcoded keyboard shortcuts when there is no modal.
+      if (shift) {
+        if (key == "PageDown") nodePane.scrollLeft += 
+          Math.floor(nodePane.clientWidth / 2);
+        else if (key == "PageUp") nodePane.scrollLeft -= 
+          Math.floor(nodePane.clientWidth / 2);
+      }
+      else {
+        if (key == "Escape") gruff.stopAnyDragging(gruff.nodePane);
+        if (key == "PageDown") nodePane.scrollTop += 
+          Math.floor(nodePane.clientHeight / 2);
+        else if (key == "PageUp") nodePane.scrollTop -= 
+          Math.floor(nodePane.clientHeight / 2);
+        else if (key == "ArrowDown") nodePane.scrollTop += 24;
+        else if (key == "ArrowUp") nodePane.scrollTop -= 24;
+        else if (key == "ArrowRight") nodePane.scrollLeft += 24;
+        else if (key == "ArrowLeft") nodePane.scrollLeft -= 24;
+      };
+      // In the usual case where no modal dialog is present,
+      // find the command whose keyboard shortcut is what
+      // the user typed, if any, and run that command.
+      var commandName = gruff.shortcuts[
+        alt ? "alt" : "noAlt"][
+        control ? "control" : "noControl"][
+        shift ? "shift" : "noShift"][
+        key];
+      if (commandName) {
+        gruff.log("handle keyboard shortcut for command", commandName);
+
+        // Prevent the Shift+L shortcut from entering an "L'
+        // into the stringDialog text field.  preventDefault
+        // stops the keydown event that we're handling here,
+        // and we use shortcutWasPressed in the keypress
+        // handler where that event still comes in later.
+        event.preventDefault();
+        gruff.shortcutWasPressed = true;
+
+        gruff.sendCommandToGruff(commandName);
+      }
+    });
+
+    // When connecting to a Gruff that already has a store open,
+    // fetch and show the layout that Gruff is currently displaying.
+    gruff.sendCommandToGruff("fetchCurrentLayout");
+
+    // Fetch info about the store that's already open on the Gruff server.
+    gruff.sendCommandToGruff("fetchStoreInfo");
+
+    // Greet the user now that everything is loaded.
+    gruff.statusMessage
+      ("Welcome to GruffJS.&nbsp;&nbsp;&nbsp;&nbsp;(very preliminary)");
+  },
+
+  // ---------------
+  // Default Methods (to call when the object does not have its own method)
+  // ---------------
+
+  showHelpString: function(object) {
+    var comment = object.comment;
+    if (comment) gruff.statusMessage(comment);
+  },
+  hide: function(object) {
+    object.style.display = "none";
+  },
+
+  // ---------
+  // Utilities
+  // ---------
+
+  log: function() {
+    if (gruff.logging) {
+      console.log.apply(this, arguments);
+    };
+  },
+  statusMessage: function(text) {
+    gruff.log("statusMessage", text);
+
+    // Replace each newline in the string with six non-breaking spaces,
+    // because the status bar holds only a single line of text.
+    text = text.replace(/<br>/gi, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+
+    // Replace every backslash-doublequote into just the doublequote.
+    // Unclear why this is needed, or if there is a better way.
+    // JSON.stringify does the opposite.
+    text = text.fixBackslashQuotes();
+
+    text = text.replace(/\</gi, "&lt;");
+    text = text.replace(/\>/gi, "&gt;");
+    gruff.log("statusMessage", text);
+    gruff.statusBar.innerHTML = text;
+  },
+  windowToPaneX: function(pane, x) {
+    return x + pane.scrollLeft - pane.offsetLeft - pane.parentNode.offsetLeft;
+  },
+  windowToPaneY: function(pane, y) {
+    return y + pane.scrollTop - pane.offsetTop - pane.parentNode.offsetTop;
+  },
+  paneToWindowX: function(pane, x) {
+    return x - pane.scrollLeft + pane.offsetLeft + pane.parentNode.offsetLeft;
+  },
+  paneToWindowY: function(pane, y) {
+    return y - pane.scrollTop + pane.offsetTop + pane.parentNode.offsetTop;
+  },
+  gruffPath: function() {
+    return "http://" + gruff.host + ":" + gruff.port + "/";
+  },
+  shortcutLabel: function(shortcut) {
+    var key = shortcut.key;
+    if (key.length == 1 && key >= "a" && key <= "z")
+      key = key.toUpperCase();
+    else if (key == " ") key = "Space";
+    return (shortcut.alt ? "Alt+" : "") +
+      (shortcut.control ? "Ctrl+" : "") +
+      (shortcut.shift ? "Shift+" : "") +
+      key;
+  },
+  showDropDownMenu: function(menuBarItem, hideIfPresent, fromAccessKey) {
+    gruff.log("showDropDownMenu", menuBarItem);
+    var menu = menuBarItem.getElementsByTagName("ul")[0],
+      nowShowing = (menu == gruff.currentModal);
+    gruff.hideAnyModal();
+    if (!nowShowing) {
+      if (menu.focusItem)
+        gruff.unfocusOnListItem(menu, menu.focusItem);
+      menu.focusIndex = -1;
+      menu.focusItem = null;
+      gruff.showModal(menu);
+      gruff.currentFocus = menu;
+      if (fromAccessKey) {
+        menuBarItem.classList.add("menuBarItemFocused");
+        gruff.focusOnAnyListItemInView(menu, true);
+      };
+    };
+  },
+  showDialog: function(dialog) {
+    gruff.log("showDialog", dialog);
+    gruff.hideAnyModal();
+    dialog.onmousedown = gruff.dialogMouseDown;
+    gruff.showModal(dialog);
+  },
+  showModal: function(modal) {
+    modal.style.display = "block";
+    gruff.modalsWereHidden = false;
+    gruff.currentModal = modal;
+  },
+  hideAnyModal: function(noCancel) {
+    var modal = gruff.currentModal;
+    gruff.log("hideAnyModal", noCancel, gruff.modalsWereHidden, modal);
+    if (!gruff.modalsWereHidden && gruff.currentModal) {
+      gruff.log("hiding", modal, modal.hide);
+      if (modal.hide) (modal.hide());
+      else gruff.hide(modal);
+      if (!noCancel && gruff.currentCommand) {
+        gruff.statusMessage("CANCELED " + gruff.currentCommand.label);
+        gruff.currentCommand = null;
+        gruff.currentCommandName = null;
+      };
+      gruff.currentModal = null;
+    }
+    gruff.modalsWereHidden = true;
+    gruff.currentFocus = null;
+  },
+
+  // Canonicalize keyboard key names across different browsers.
+  keyDownName: function(event) {
+    var key = event.key;
+    if (key) {
+
+      // "ArrowDown" is Firefox and others, while "Down" is Chrome.
+      if (key == "Down") key = "ArrowDown";
+      else if (key == "Up") key = "ArrowUp";
+      else if (key == "Left") key = "ArrowLeft";
+      else if (key == "Right") key = "ArrowRight";
+
+      return key;
+    };
+    // This key name/code translation is needed only for Safari.
+    // Everyone else implements event.key.
+    var code = event.keyCode;
+    if (code == 13) return "Enter";
+    if (code == 27) return "Escape";
+    if (code == 32) return " "; // 2016-11-11a
+    if (code == 37) return "ArrowLeft";
+    if (code == 38) return "ArrowUp";
+    if (code == 39) return "ArrowRight";
+    if (code == 40) return "ArrowDown";
+    if (code == 188) return event.shiftKey ? "<" : ",";
+    if (code == 190) return event.shiftKey ? ">" : ".";
+    if ((!event.shiftKey) && code << 97) code += 32;
+    return String.fromCharCode(code) ||
+      event.keyIdentifier;
+  },
+
+  // Separate a string into an array of substrings,
+  // each of which fits within the specified pixel width.
+  splitStringToWidth: function(string, width, context) {
+    var words = string.split(/[ -]/),
+      lines = [], line = "",
+      testLine, testWidth, prevWidth;
+    while (word = words.shift()) {
+      testLine = line ? line + " " + word : word;
+      testWidth = context.measureText(testLine).width;
+      if (testWidth > width) {
+        if (line) {
+          if (!prevWidth)
+            prevWidth = context.measureText(line).width;
+          lines.push({ string: line, width: prevWidth });
+          line = word;
+        }
+        else lines.push({ string: word, width: testWidth });
+        prevWidth = null;
+      }
+      else {
+        line = testLine;
+        prevWidth = testWidth;
+      };
+    };
+    if (line) {
+      if (!prevWidth)
+        prevWidth = context.measureText(line).width;
+      lines.push({ string: line, width: prevWidth });
+    }
+    return lines;        
+  },
+
+  // Select or deselect an item in any HTML item list.
+  toggleListItem: function(listItem) {
+    gruff.log("toggleListItem", listItem, listItem.selected);
+    var itemList = listItem.parentNode,
+    singleChoice = !itemList.allowMultipleChoices;
+
+    // For a single-choice list, deselect any other choices
+    // when the user selects a new one.
+    if (singleChoice) {
+      for (var j=0; j < itemList.childElementCount; ++j) {
+        var otherItem = itemList.childNodes[j];
+        if ((!(otherItem == listItem)) && otherItem.selected) {
+          otherItem.selected = false;
+          gruff.updateListItemSelectedAndFocusedStyle(otherItem);
+        };
+      };
+    };
+
+    // Select or deselect the specified choice.
+    listItem.selected = !listItem.selected;
+    gruff.updateListItemSelectedAndFocusedStyle(listItem);
+  },
+
+  // Handle keystrokes in any item list.
+  itemListKeyDown: function(event) {
+    var itemList = this,
+      numItems = itemList.childElementCount,
+      key = gruff.keyDownName(event);
+    gruff.log("itemListKeyDown", itemList, event, key);
+    if (key == "ArrowDown" || key == "ArrowUp" || key == " ") {
+
+      // Prevent the arrow scrolling that's built into an HTML item list.
+      event.preventDefault();
+
+      var focusIndex = itemList.focusIndex,
+        focusItem = itemList.focusItem,
+        newFocusIndex;
+
+      // When the spacebar is pressed in an itemList, invoke
+      // the menuItem if it is a momentary menu (without selecting
+      // the menuItem), and otherwise toggle selection of the item.
+      if (focusItem && key == " ")
+        if (itemList.momentary)
+          focusItem.invoke();
+        else gruff.toggleListItem(focusItem);
+
+      // Focus on different list items with the vertical arrow keys.
+      else {
+        if (!focusItem) {
+          gruff.focusOnAnyListItemInView(itemList, true);
+        }
+        else {
+          if (key == "ArrowDown")
+            newFocusIndex = Math.min(focusIndex + 1, numItems - 1);
+          else newFocusIndex = Math.max(focusIndex - 1, 0);
+          gruff.focusOnListItemByIndex(itemList, newFocusIndex);
+          gruff.scrollListItemIntoView(itemList.focusItem);
+        };
+      };
+    }
+
+    // Look for the next item that begins with the typed character.
+    else if (key >= "a" && key <= "z") {
+      var count = itemList.childElementCount,
+        thisIndex = itemList.focusIndex;
+      for (var j = thisIndex >= count - 1 ? 0 : thisIndex + 1;
+                   j != thisIndex;
+                   j >= count - 1 ? j = Math.min(0, thisIndex) : ++j ) { // 2016-09-12a
+        var item = itemList.childNodes[j],
+          label = item.innerHTML;
+        if (label && (label.slice(0, 1).toLowerCase() == key)) {
+          gruff.focusOnListItemByIndex(itemList, j);
+          gruff.scrollListItemIntoView(itemList.focusItem);
+          break;
+        };
+      };
+    };
+  },
+
+  // Select or deselect any clicked list item.
+  listItemMouseDown: function(event) {
+    var listItem = this == window ? gruff.elementForEnter : this,
+      itemList = listItem.parentNode;
+    gruff.log("listItemMouseDown", listItem, itemList, event);
+    if (!itemList.momentary)
+      gruff.toggleListItem(listItem);
+ 
+    // Prevent a dragging motion from selecting text.
+    event.preventDefault();
+  },
+
+  // Handle the mouse cursor moving over any list item.
+  listItemMouseEnter: function(event) {
+    gruff.log("listItemMouseEnter", this, event);
+    gruff.focusOnListItem(this.parentNode, this);
+  },
+  listItemMouseOut: function(event) {
+    gruff.log("listItemMouseOut", this, event);
+    gruff.unfocusOnListItem(this.parentNode, this);
+  },
+
+  // Scroll an HTML list item into view.
+  scrollListItemIntoView: function(listItem) {
+    var itemList = listItem.parentNode,
+      scrollTop = itemList.scrollTop,
+      listHeight = itemList.clientHeight,
+      scrollBottom = scrollTop + listHeight,
+      itemTop = listItem.offsetTop,
+      itemBottom = itemTop + listItem.offsetHeight;
+    gruff.log("scrollListItemIntoView", listItem, itemList,
+      scrollTop, scrollBottom, listHeight, itemTop, itemBottom);
+    if (itemTop < scrollTop)
+      itemList.scrollTop = itemTop;
+    else if (itemBottom > scrollBottom)
+      itemList.scrollTop = itemBottom - listHeight;
+  },
+
+  // Handle a scroll in an item list.
+  itemListOnScroll: function(event) {
+    gruff.focusOnAnyListItemInView(this);
+  },
+
+  // Focus on a list item that's currently scrolled into view.
+  focusOnAnyListItemInView: function(itemList, always) {
+    var focusIndex = itemList.focusIndex,
+      noFocusYet = (focusIndex < 0);
+    gruff.log("focusOnAnyListItemInView", itemList, always,
+      focusIndex, noFocusYet);
+
+    // Don't start marking the focus if the user has not used
+    // any keys to move the focus already.
+    if (!always && noFocusYet) return;
+
+    var listItem = itemList.focusItem || itemList.childNodes[0];
+      scrollTop = itemList.scrollTop,
+      listHeight = itemList.clientHeight,
+      scrollBottom = scrollTop + listHeight,
+      itemTop = listItem.offsetTop,
+      itemBottom = itemTop + listItem.offsetHeight,
+      newIndex = null;
+    if ((itemTop < scrollTop) || noFocusYet)
+      newIndex = gruff.indexOfFirstListItemInView(itemList);
+    else if (itemBottom > scrollBottom)
+      newIndex = gruff.indexOfFirstListItemInView(itemList, true);
+    if (!(newIndex == null))   // zero is false ...
+      gruff.focusOnListItemByIndex(itemList, newIndex);
+  },
+
+  // Find a list item that's scrolled into view, to focus on it.
+  indexOfFirstListItemInView: function(itemList, fromBottom) {
+    var scrollTop = itemList.scrollTop,
+      listHeight = itemList.clientHeight,
+      scrollBottom = scrollTop + listHeight,
+      nodeList = itemList.childNodes,
+      numItems = nodeList.length,
+      listItem;
+
+    // Remember that forEach does not work with the childNodes
+    // of an item list, which is not a true array.
+    for (var index = 0; index < numItems; ++index) {
+
+      listItem = nodeList[index];
+      if (fromBottom) {
+        if (listItem.offsetTop + listItem.offsetHeight > scrollBottom)
+          return index - 1;
+      }
+      else {
+        if (listItem.offsetTop >= scrollTop)
+          return index;
+      };
+    };
+  },
+
+  // Focus on a specified list item.
+  focusOnListItemByIndex: function(itemList, index) {
+    var listItem = itemList.childNodes[index];
+    if (listItem)
+      gruff.focusOnListItem(itemList, listItem, index);
+  },
+  focusOnListItem: function(itemList, listItem, index) {
+    var oldFocusItem = itemList.focusItem;
+    gruff.log("focusOnListItem", itemList, listItem,
+      oldFocusItem, listItem.selected, listItem.focused);
+    if (!listItem.focused) {
+      if (oldFocusItem)
+        gruff.unfocusOnListItem(itemList, oldFocusItem);
+      listItem.focused = true;
+      itemList.focusItem = listItem;
+      itemList.focusIndex = index || gruff.listItemIndex(itemList, listItem);
+      if (itemList.momentary)
+        gruff.elementForEnter = listItem;
+      gruff.updateListItemSelectedAndFocusedStyle(listItem);
+      if (listItem.showHelpString)
+        listItem.showHelpString();
+      else gruff.showHelpString(listItem);
+    };
+  },
+  unfocusOnListItem: function(itemList, listItem) {
+    gruff.log("unfocusOnListItem", itemList, listItem);
+    if (listItem.focused) {
+      listItem.focused = false;
+      if (gruff.elementForEnter == listItem)
+        gruff.elementForEnter = null;
+      gruff.updateListItemSelectedAndFocusedStyle(listItem);
+    };
+  },
+
+  listItemIndex: function(itemList, listItem) {
+    var items = itemList.childNodes;
+    for (var j = 0; j < items.length; ++j) {
+      if (items[j] === listItem) return j;
+    };
+  },
+
+  // Set the style class for a list item for its selected and/or focused state.
+  updateListItemSelectedAndFocusedStyle: function(listItem) {
+    var styles = ["listItemSelected", "listItemFocused",
+        "listItemSelectedAndFocused"],
+      newStyle = null;
+    gruff.log("updateListItemSelectedAndFocusedStyle", listItem,
+      listItem.selected, listItem.focused);
+    styles.forEach(function(style) {
+      listItem.classList.remove(style);
+    });
+    if (listItem.selected) {
+      if (listItem.focused)
+        newStyle = "listItemSelectedAndFocused";
+      else newStyle = "listItemSelected";
+    }
+    else if (listItem.focused)
+      newStyle = "listItemFocused";
+    if (newStyle)
+      listItem.classList.add(newStyle);
+  },
+
+  // Show the current command in the status bar.
+  showCurrentCommandInStatusBar: function() {
+    var command = gruff.currentCommand;
+    if (command && !command.noStatusMessage)
+      gruff.statusMessage(command.label + " (working ...)");
+  },
+
+  // Find a node or link in various ways.
+  findSelectedNode: function() {
+    var name = gruff.selectedNodeName;
+    return name && gruff.findNodeFromName(name);
+  },
+  findNodeFromName: function(name, layout) {
+    if (!layout) layout = gruff.layout; // 2017-04-12a
+    var foundNode = null;
+    layout.nodes.forEach(function (node) {
+      if (!foundNode && node.name == name) foundNode = node;
+    });
+    return foundNode;
+  },
+  findLinkFromName: function(name) {
+    var foundLink = null;
+    gruff.layout.links.forEach(function (link) {
+      if (!foundLink && link.name == name) foundLink = link;
+    });
+    return foundLink;
+  },
+  otherNode: function(link, node) { // 2017-04-12a
+    var fromNode = link.fromNode;
+    if (node == fromNode)
+      return link.toNode;
+    else return fromNode;
+  },
+  findNodeUnderPosition: function(x, y) {
+    var foundNode = null;
+    if (gruff.layout) {
+      gruff.layout.nodes.forEach(function(node) {
+        if (x >= node.x && x <= (node.x + node.width) &&
+            y >= node.y && y <= (node.y + node.height)) {
+          foundNode = node;
+        };
+      });
+    };
+    return foundNode;
+  },
+
+  // Handle when the browser window is resized.
+  // This includes when toggling the debug pane.
+  resize: function() {
+    gruff.log("resize the browser");
+    gruff.sendCommandToGruff("newWebBrowserWindowSize",
+      "width=" + gruff.nodePane.clientWidth +
+      "&height=" + gruff.nodePane.clientHeight);
+  },
+
+  // Draw a rubber-banding line from a node.
+  dragLineFromNode: function(data) {
+    var nodePane = gruff.nodePane,
+     fromNode = gruff.findSelectedNode();
+    gruff.log("dragLineFromNode", fromNode);
+    if (!fromNode) return;
+    nodePane.dragging = true;
+    nodePane.dragType = "linkToNode";
+    nodePane.dragFromX = fromNode.centerX;
+    nodePane.dragFromY = fromNode.centerY;
+    if (nodePane.mouseX) {
+      nodePane.dragX = nodePane.mouseX;
+      nodePane.dragY = nodePane.mouseY;
+      gruff.invalidateNodePane();
+    };
+  },
+
+  // Determine which web browser the user is using, to handle differences.
+  whichWebBrowser: function() {
+    var foundName = null;
+    [ "Firefox", "Chrome", "Safari", "Opera", "MSIE" ].forEach(function(name) {
+      if (!foundName && (navigator.userAgent.indexOf(name) != -1))
+        foundName = name;
+    });
+    return foundName;
+  },
+
+  // Do one step of rubber-banding a line.
+  drawRubberLine: function(pane) {
+    var canvas = nodePane.canvas,
+      context = canvas.getContext("2d");
+    context.lineWidth = 1;
+    context.strokeStyle = "red";
+    context.beginPath();
+    context.moveTo(pane.dragFromX, pane.dragFromY);
+    context.lineTo(pane.dragX, pane.dragY);
+    context.stroke();
+  },
+  // This is no good because there's no way to turn off antialiasing,
+  // and XORing will erase an antialiased line.
+  // If dx and dy are not passed, then we are drawing the initial line
+  // or erasing the final line.
+  /*
+  toggleRubberLine: function(pane, dx, dy) {
+    var canvas = nodePane.canvas,
+      context = canvas.getContext("2d");
+    context.save();
+    context.lineWidth = 1;
+    context.strokeStyle = "black";
+    context.globalCompositeOperation = "xor";
+    context.beginPath();
+    context.moveTo(pane.dragFromX, pane.dragFromY);
+    context.lineTo(pane.dragX, pane.dragY);
+    context.stroke();
+    if (!(dx == null)) { // zero is false ...
+      context.beginPath();
+      context.moveTo(pane.dragFromX, pane.dragFromY);
+      context.lineTo(pane.dragX + dx, pane.dragY + dy);
+      context.stroke();
+    };
+    context.restore();
+  },
+  */
+
+}; // end of the large gruff object
+
+// Return the index of the nth occurrence of a specifed character
+// in a string if it exists, or else null.
+String.prototype.indexOfNth = function(char, n) { // 2016-09-12b
+  var index = -1;
+  for (var j = 0; j < n; j++ ) {
+    index = this.indexOf(char, index + 1);
+    if (index == -1) return null;
+  }
+  return index;
+};
+
+// Return a copy of a string, uppercasing just the first character.
+String.prototype.capitalizeWord = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+};
+
+// If the first character is an open angle bracket, then return
+// a copy of the string with the first and last characters removed.
+String.prototype.removeAngleBrackets = function() {
+  var string = this;
+  if (string.charAt(0) == "<")
+   string = string.slice(1, string.length - 1);
+  return string;
+};
+
+// Replace every backslash-doublequote in a string with just
+// the doublequote.  The /foo/gi format instead of "foo"
+// globally replaces all occurrences rather than just the first.
+// Perhaps there is a better way to do this or to avoid it.
+String.prototype.fixBackslashQuotes = function() {
+  return this.replace(/\\\"/gi,"\"");
+};
+
+// ----------
+// HTML Below
+// ----------
+
+</script>
+</head>
+
+<!-- HTML -->
+
+<body id="body" class="body" onload=gruff.onload()
+>
+<ul class="menuBar" id="menuBar"></ul>
+<div class="graphView" id="graphView">
+  <div class="legend" id="legend">
+    <canvas class="legendCanvas" id="legendCanvas">
+    </canvas>
+  </div>
+  <div class="nodePane" id="nodePane">
+    <canvas class="nodePaneCanvas" id="nodePaneCanvas">
+    </canvas>
+  </div>
+</div>
+<div class="statusBar" id="statusBar">Status Bar</div>
+<ul class="popUpMenu" id="popUpMenu" autofocus>
+</ul>
+<div class="choiceListDialog" id="choiceListDialog">
+  <span class="modalPrompt" id="choicePrompt">
+    This will be a prompt for a choice.
+  </span>
+  <ul class="choiceListDialogItemList" id="choiceListDialogItemList" autofocus>
+  </ul>
+  <button class="okButton" id="choiceListDialogOKButton">OK</button>
+  <button class="cancelButton" id="choiceListDialogCancelButton">Cancel</button>
+</div>
+<div class="stringDialog" id="stringDialog">
+  <span class="modalPrompt" id="stringPrompt">
+    This will be a prompt for a string.
+  </span>
+  <input type="text" class="stringEntry" id="stringEntry" autofocus>
+  </input>
+  <button class="okButton" id="stringDialogOKButton">OK</button>
+  <button class="cancelButton" id="stringDialogCancelButton">Cancel</button>
+</div>
+<div class="messageDialog" id="messageDialog">
+  <img class="icon" id="messageDialogIcon" src=info.png>
+  <span class="dialogMessage" id="dialogMessage">
+    This will be a message.
+  </span>
+  <button class="okButton" id="messageDialogOKButton">OK</button>
+  <button class="cancelButton" id="messageDialogCancelButton">Cancel</button>
+</div>
+</body>
+</html>
+
