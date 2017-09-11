@@ -1,0 +1,55 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix admin: <http://webns.net/mvcb/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+
+<http://utdallas.edu/fall17/TimBernersLee>
+        <http://www.w3.org/2001/vcard-rdf/3.0#BDAY>
+                "June 8, 1955" ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#EMAIL>
+                "timbl@w3.org" ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#FN>
+                "Sir Timothy John Berners-Lee" ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#N>
+                [ <http://www.w3.org/2001/vcard-rdf/3.0#Family>
+                          "Berners-Lee" ;
+                  <http://www.w3.org/2001/vcard-rdf/3.0#Given>
+                          "Timothy"
+                ] ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#ROLE>
+                "Computer Scientist" .
+
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf>
+        a                     foaf:PersonalProfileDocument ;
+        admin:errorReportsTo  <mailto:leigh@ldodds.com> ;
+        admin:generatorAgent  <http://www.ldodds.com/foaf/foaf-a-matic> ;
+        foaf:maker            <file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> ;
+        foaf:primaryTopic     <file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> .
+
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me>
+        a                       foaf:Person ;
+        foaf:depiction          <file:///Users/dsangvikar/development/study/semantic/labs/lab1/DhruvSangvikar.jpg> ;
+        foaf:family_name        "Sangvikar" ;
+        foaf:givenname          "Dhruv" ;
+        foaf:homepage           <file:///Users/dsangvikar/development/study/semantic/labs/lab1/utdallas.edu/~dgs160230> ;
+        foaf:knows              [ a             foaf:Person ;
+                                  rdfs:seeAlso  <http://google.com> ;
+                                  foaf:mbox     <mailto:AFolane@gmail.com> ;
+                                  foaf:name     "Amruta Folane"
+                                ] ;
+        foaf:knows              [ a             foaf:Person ;
+                                  rdfs:seeAlso  <http://google.com> ;
+                                  foaf:mbox     <mailto:ashish.mohapatra@utdallas.edu> ;
+                                  foaf:name     "Ashish Mohapatra"
+                                ] ;
+        foaf:knows              [ a             foaf:Person ;
+                                  rdfs:seeAlso  <http://google.com> ;
+                                  foaf:mbox     <mailto:iamrashford@gmail.com> ;
+                                  foaf:name     "Marcus Rashford"
+                                ] ;
+        foaf:mbox               <mailto:dgs160230@utdallas.edu> ;
+        foaf:name               "Dhruv Sangvikar" ;
+        foaf:phone              <tel:9898912345> ;
+        foaf:schoolHomepage     <http://www.utdallas.edu/> ;
+        foaf:workInfoHomepage   <file:///Users/dsangvikar/development/study/semantic/labs/lab1/Student> ;
+        foaf:workplaceHomepage  <file:///Users/dsangvikar/development/study/semantic/labs/lab1/utdallas.edu/~dgs160230> .

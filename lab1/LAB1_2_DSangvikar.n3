@@ -1,0 +1,15 @@
+<http://utdallas.edu/fall17/TimBernersLee>
+        <http://www.w3.org/2001/vcard-rdf/3.0#BDAY>
+                "June 8, 1955" ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#EMAIL>
+                "timbl@w3.org" ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#FN>
+                "Sir Timothy John Berners-Lee" ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#N>
+                [ <http://www.w3.org/2001/vcard-rdf/3.0#Family>
+                          "Berners-Lee" ;
+                  <http://www.w3.org/2001/vcard-rdf/3.0#Given>
+                          "Timothy"
+                ] ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#ROLE>
+                "Computer Scientist" .

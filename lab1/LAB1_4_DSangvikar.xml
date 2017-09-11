@@ -1,0 +1,57 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:admin="http://webns.net/mvcb/"
+    xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/">
+  <rdf:Description rdf:about="http://utdallas.edu/fall17/TimBernersLee">
+    <vcard:FN>Sir Timothy John Berners-Lee</vcard:FN>
+    <vcard:N rdf:parseType="Resource">
+      <vcard:Given>Timothy</vcard:Given>
+      <vcard:Family>Berners-Lee</vcard:Family>
+    </vcard:N>
+    <vcard:EMAIL>timbl@w3.org</vcard:EMAIL>
+    <vcard:BDAY>June 8, 1955</vcard:BDAY>
+    <vcard:ROLE>Computer Scientist</vcard:ROLE>
+  </rdf:Description>
+  <foaf:PersonalProfileDocument rdf:about="file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf">
+    <foaf:maker>
+      <foaf:Person rdf:about="file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me">
+        <foaf:name>Dhruv Sangvikar</foaf:name>
+        <foaf:givenname>Dhruv</foaf:givenname>
+        <foaf:family_name>Sangvikar</foaf:family_name>
+        <foaf:mbox rdf:resource="mailto:dgs160230@utdallas.edu"/>
+        <foaf:homepage rdf:resource="file:///Users/dsangvikar/development/study/semantic/labs/lab1/utdallas.edu/~dgs160230"/>
+        <foaf:depiction rdf:resource="file:///Users/dsangvikar/development/study/semantic/labs/lab1/DhruvSangvikar.jpg"/>
+        <foaf:phone rdf:resource="tel:9898912345"/>
+        <foaf:workplaceHomepage rdf:resource="file:///Users/dsangvikar/development/study/semantic/labs/lab1/utdallas.edu/~dgs160230"/>
+        <foaf:workInfoHomepage rdf:resource="file:///Users/dsangvikar/development/study/semantic/labs/lab1/Student"/>
+        <foaf:schoolHomepage rdf:resource="http://www.utdallas.edu/"/>
+        <foaf:knows>
+          <foaf:Person>
+            <foaf:name>Amruta Folane</foaf:name>
+            <foaf:mbox rdf:resource="mailto:AFolane@gmail.com"/>
+            <rdfs:seeAlso rdf:resource="http://google.com"/>
+          </foaf:Person>
+        </foaf:knows>
+        <foaf:knows>
+          <foaf:Person>
+            <foaf:name>Ashish Mohapatra</foaf:name>
+            <foaf:mbox rdf:resource="mailto:ashish.mohapatra@utdallas.edu"/>
+            <rdfs:seeAlso rdf:resource="http://google.com"/>
+          </foaf:Person>
+        </foaf:knows>
+        <foaf:knows>
+          <foaf:Person>
+            <foaf:name>Marcus Rashford</foaf:name>
+            <foaf:mbox rdf:resource="mailto:iamrashford@gmail.com"/>
+            <rdfs:seeAlso rdf:resource="http://google.com"/>
+          </foaf:Person>
+        </foaf:knows>
+      </foaf:Person>
+    </foaf:maker>
+    <foaf:primaryTopic rdf:resource="file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me"/>
+    <admin:generatorAgent rdf:resource="http://www.ldodds.com/foaf/foaf-a-matic"/>
+    <admin:errorReportsTo rdf:resource="mailto:leigh@ldodds.com"/>
+  </foaf:PersonalProfileDocument>
+</rdf:RDF>

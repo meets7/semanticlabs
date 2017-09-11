@@ -1,0 +1,14 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+  <rdf:Description rdf:about="http://utdallas.edu/fall17/TimBernersLee">
+    <vcard:ROLE>Computer Scientist</vcard:ROLE>
+    <vcard:BDAY>June 8, 1955</vcard:BDAY>
+    <vcard:EMAIL>timbl@w3.org</vcard:EMAIL>
+    <vcard:N rdf:parseType="Resource">
+      <vcard:Family>Berners-Lee</vcard:Family>
+      <vcard:Given>Timothy</vcard:Given>
+    </vcard:N>
+    <vcard:FN>Sir Timothy John Berners-Lee</vcard:FN>
+  </rdf:Description>
+</rdf:RDF>

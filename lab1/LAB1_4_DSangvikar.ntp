@@ -1,0 +1,38 @@
+<http://utdallas.edu/fall17/TimBernersLee> <http://www.w3.org/2001/vcard-rdf/3.0#FN> "Sir Timothy John Berners-Lee" .
+<http://utdallas.edu/fall17/TimBernersLee> <http://www.w3.org/2001/vcard-rdf/3.0#N> _:B02b9d0d9X2D5822X2D41fdX2Dbea0X2Db2714c9e828c .
+<http://utdallas.edu/fall17/TimBernersLee> <http://www.w3.org/2001/vcard-rdf/3.0#EMAIL> "timbl@w3.org" .
+<http://utdallas.edu/fall17/TimBernersLee> <http://www.w3.org/2001/vcard-rdf/3.0#BDAY> "June 8, 1955" .
+<http://utdallas.edu/fall17/TimBernersLee> <http://www.w3.org/2001/vcard-rdf/3.0#ROLE> "Computer Scientist" .
+_:B02b9d0d9X2D5822X2D41fdX2Dbea0X2Db2714c9e828c <http://www.w3.org/2001/vcard-rdf/3.0#Given> "Timothy" .
+_:B02b9d0d9X2D5822X2D41fdX2Dbea0X2Db2714c9e828c <http://www.w3.org/2001/vcard-rdf/3.0#Family> "Berners-Lee" .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/PersonalProfileDocument> .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf> <http://xmlns.com/foaf/0.1/maker> <file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf> <http://xmlns.com/foaf/0.1/primaryTopic> <file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf> <http://webns.net/mvcb/generatorAgent> <http://www.ldodds.com/foaf/foaf-a-matic> .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf> <http://webns.net/mvcb/errorReportsTo> <mailto:leigh@ldodds.com> .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://xmlns.com/foaf/0.1/name> "Dhruv Sangvikar" .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://xmlns.com/foaf/0.1/givenname> "Dhruv" .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://xmlns.com/foaf/0.1/family_name> "Sangvikar" .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://xmlns.com/foaf/0.1/mbox> <mailto:dgs160230@utdallas.edu> .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://xmlns.com/foaf/0.1/homepage> <file:///Users/dsangvikar/development/study/semantic/labs/lab1/utdallas.edu/~dgs160230> .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://xmlns.com/foaf/0.1/depiction> <file:///Users/dsangvikar/development/study/semantic/labs/lab1/DhruvSangvikar.jpg> .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://xmlns.com/foaf/0.1/phone> <tel:9898912345> .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://xmlns.com/foaf/0.1/workplaceHomepage> <file:///Users/dsangvikar/development/study/semantic/labs/lab1/utdallas.edu/~dgs160230> .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://xmlns.com/foaf/0.1/workInfoHomepage> <file:///Users/dsangvikar/development/study/semantic/labs/lab1/Student> .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://xmlns.com/foaf/0.1/schoolHomepage> <http://www.utdallas.edu/> .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://xmlns.com/foaf/0.1/knows> _:Bfddd299eX2Dec3dX2D4351X2Da7c9X2D5a0a4baf8db3 .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://xmlns.com/foaf/0.1/knows> _:Bc3084d48X2D629fX2D4e6dX2Da5a0X2Dd83b34ead01c .
+<file:///Users/dsangvikar/development/study/semantic/labs/lab1/dhruv_FOAFFriends.rdf#me> <http://xmlns.com/foaf/0.1/knows> _:B030eb3f7X2Db6daX2D4ea9X2D994aX2D0b2daa049183 .
+_:Bfddd299eX2Dec3dX2D4351X2Da7c9X2D5a0a4baf8db3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+_:Bfddd299eX2Dec3dX2D4351X2Da7c9X2D5a0a4baf8db3 <http://xmlns.com/foaf/0.1/name> "Amruta Folane" .
+_:Bfddd299eX2Dec3dX2D4351X2Da7c9X2D5a0a4baf8db3 <http://xmlns.com/foaf/0.1/mbox> <mailto:AFolane@gmail.com> .
+_:Bfddd299eX2Dec3dX2D4351X2Da7c9X2D5a0a4baf8db3 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://google.com> .
+_:Bc3084d48X2D629fX2D4e6dX2Da5a0X2Dd83b34ead01c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+_:Bc3084d48X2D629fX2D4e6dX2Da5a0X2Dd83b34ead01c <http://xmlns.com/foaf/0.1/name> "Ashish Mohapatra" .
+_:Bc3084d48X2D629fX2D4e6dX2Da5a0X2Dd83b34ead01c <http://xmlns.com/foaf/0.1/mbox> <mailto:ashish.mohapatra@utdallas.edu> .
+_:Bc3084d48X2D629fX2D4e6dX2Da5a0X2Dd83b34ead01c <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://google.com> .
+_:B030eb3f7X2Db6daX2D4ea9X2D994aX2D0b2daa049183 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+_:B030eb3f7X2Db6daX2D4ea9X2D994aX2D0b2daa049183 <http://xmlns.com/foaf/0.1/name> "Marcus Rashford" .
+_:B030eb3f7X2Db6daX2D4ea9X2D994aX2D0b2daa049183 <http://xmlns.com/foaf/0.1/mbox> <mailto:iamrashford@gmail.com> .
+_:B030eb3f7X2Db6daX2D4ea9X2D994aX2D0b2daa049183 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://google.com> .

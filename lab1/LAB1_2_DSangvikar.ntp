@@ -1,0 +1,7 @@
+<http://utdallas.edu/fall17/TimBernersLee> <http://www.w3.org/2001/vcard-rdf/3.0#ROLE> "Computer Scientist" .
+<http://utdallas.edu/fall17/TimBernersLee> <http://www.w3.org/2001/vcard-rdf/3.0#BDAY> "June 8, 1955" .
+<http://utdallas.edu/fall17/TimBernersLee> <http://www.w3.org/2001/vcard-rdf/3.0#EMAIL> "timbl@w3.org" .
+<http://utdallas.edu/fall17/TimBernersLee> <http://www.w3.org/2001/vcard-rdf/3.0#N> _:B89ce5e25X2De920X2D44f9X2D8d60X2D77726b6ea367 .
+<http://utdallas.edu/fall17/TimBernersLee> <http://www.w3.org/2001/vcard-rdf/3.0#FN> "Sir Timothy John Berners-Lee" .
+_:B89ce5e25X2De920X2D44f9X2D8d60X2D77726b6ea367 <http://www.w3.org/2001/vcard-rdf/3.0#Family> "Berners-Lee" .
+_:B89ce5e25X2De920X2D44f9X2D8d60X2D77726b6ea367 <http://www.w3.org/2001/vcard-rdf/3.0#Given> "Timothy" .
