@@ -1,0 +1,201 @@
+*********************************
+* APPROACH 1: RDFS with classes *
+*********************************
+
+1. Creation of generic class objects should not be allowed. For eg. document has to be of type unclassified, confidential, secret, topsecret.
+In a way document and compartment should be abstract classes.
+
+a. In the T-box: schema
+  
+class thing{
+
+}
+------------------------------------------------------------------------
+class person:thing {
+    string name;
+    securitylevel level;
+    Compartment compartment;
+}
+------------------------------------------------------------------------
+class compartment:thing {
+}
+class country:compartment{
+}
+class continent:country{
+}
+class world:continent{
+}
+------------------------------------------------------------------------
+abstract class  securitylevel{
+}
+class unclassified:securitylevel{
+}
+class confidential:unclassified{
+}
+class secret:confidential{
+}
+class topsecret:secret{
+}
+------------------------------------------------------------------------
+abstract class doc: thing {
+    string data;
+
+}
+class unclassifieddoc: doc, unclassified, compartment{
+}
+class confidentialdoc: doc, unclassified, compartment{
+}
+class secretedoc: doc, confidential, compartment{
+}
+class topsecretdoc: doc, secret, compartment{
+}
+------------------------------------------------------------------------
+
+b. while inserting the document, it should be one of those 4 securitylevel. The constraints take care of this requirement. 
+    The data and compartment type is given and stored inside the document. The document gets inserted. Done.
+
+c. Check the user's securitylevel and compartment both should be equal or of greater clearance level than the document.
+    For eg. in the following pseuedo code, JohnSmith should be able to access the document. 
+
+        JohnSmith = Person(){level = topsecret, compartment = world}
+        SomeDocument = secretedoc()
+        if JohnSmith.securitylevel > = type of SomeDocument:
+            if SomeDocument has compartment:
+                if SomeDocument compartment <= JohnSmith.compartment:
+                    then access granted to document
+                else:
+                    then access denied to document
+            else
+                then access granted to document
+        else:
+            then access denied to document
+
+2.a 
+
+The following cases are taken care of by the above T-box:
+          a. document has level and compartment both, user has only level
+          b. document has level only, user has only level
+
+However, assuming we have a credentials based system (eg. username, password) for each user, the whole system relies on the credentials 
+being kept safe by the user. If those are compromised by an attacker, then the above security model fails to contain him.
+
+*****************************
+* APPROACH 2: RDFS Property *
+*****************************
+
+1. In this approach the security levels will be represented as RDFS properties. 
+a. The T-Box Schema: 
+  We will represent access to each security level, and access to each compartment level as a separate RDF property. 
+  There will be a hierarchy among the security classification levels and compartments. 
+  The approach is, that any property allowing access to a less restricted level, is a subpropertyOf,  a property that allows access to a more restricted level.  
+  This way anybody having the more restricted level can access the less restricted level, but not in reverse. 
+  This is similar to the RDFS class example, just that we now exploit the RDFS inferencing of subpropertyOf instead of subclassOf.
+
+  For the security levels, we will have:
+    i) unclassifiedAllowed subpropertyOf confidentialAllowed
+    ii) confidentialAllowed subpropertyOf secretAllowed
+    iii) secretAllowed subpropertyOf topSecretAllowed
+
+  Then for any compartment hierarchies that exist, we will have:
+    lessRestrictedCompartmentAllowed subpropertyOf moreRestrictedCompartmentAllowed
+
+b. For insertion of new facts:
+  The inserter will decide on what's the least restrictive security level that can see the new fact. 
+  For each compartment, inserter decides the least restrictive compartment in its heirarchy that can see the new fact.
+  We'll create a reification statement for the new fact. The reification statement needs to have a new property to a blank node, 
+    where the property corresponds to the least restrictive security level as above, and additional new properties, 
+        where the property corresponds to the compartments that are needed, according to what we decided above. 
+
+c. For querying a document:
+    The system knows the highest security level a user has access to, and any of the most superior compartments a user has access to.
+  Each fact in the result query will be restricted based on the existence of its reification statement, and the existence of properties coming off this reification statement.
+  
+2. a. Extra assertions that could cause the security reasoning to be violated: 
+        If users are allowed to insert additional reification statements, or add additional properties on these reification statements, 
+        that could cause a situation where the security constraint on some classified statement is violated.
+    So we would want to restrict insertions that add additional security level properties. 
+    Any update to the classification level should replace the existing property. 
+
+
+************************************
+* APPROACH 3: OWL DL with literals *
+************************************
+
+1. Basically, all the security levels and the compartments would be literals. Hence, every document and person would have these individual 
+properties. They would be a list if more than one entities exist.
+
+a. In the T-box: schema
+
+class thing{
+
+}
+------------------------------------------------------------------------
+class person:thing {
+    string name;
+        string[] securitylevel;
+    string[] compartment;
+}
+------------------------------------------------------------------------
+class doc: thing {
+    string data;
+        string[] securitylevel;
+    string[] compartment;
+}
+------------------------------------------------------------------------ 
+
+b. For new insertion of facts:
+    - The securitylevel and compartment of the document is be specified by the person who will be adding the new document. 
+
+c. For querying a document:
+    - The securitylevel as well as the compartment should be greater than or equal to the document's securitylevel and compartment.
+  
+2. a. 
+If the user misspells the securitylevel or the compartment, then the comparison would go wrong as they are string literals.
+
+ 
+
+    
+  
+
+*****************************************
+* COMPARISON of the three approaches: *
+*****************************************
+
+1. Class
+
+Pros:
+ - Clear separation of heirarchy will mean less ambiguity between who can access which document. 
+ - A class heirarchy reflects the actual heirarchy of documents. Easy to translate and manage.
+ - Statically ensure that all type-specific behavior is handled. That is, common behavior can be extracted out in the base abstract
+  class to be implemented by or overriden by the inherting class.
+ - Allows to extend classes outside the original schema document.
+
+Cons:
+- If type of document changes, a completely new object needs to be created. Not at all a good idea for frequently changing documents.
+- Complexity increases in changing and adding new classes.
+
+2. Property
+
+Pros:
+    - Easy to manage multiple levels of security.
+    - No need to create new object when security level of a document changes.
+    - Less complex than class based approach.
+Cons:
+    - Need to maintain a fixed list of property values to avoid Literals. The possible list of values may need to be exposed to the
+      creator of the document.
+    - The fixed list of properties cannot be altered other than the source. Extending is difficult.
+
+3. Literals
+
+Pros:
+    - No fixed type checking or property checking allows for a lot more flexible design. Can add new levels and compartments at will.
+
+Cons:
+    - It's pro itself is a con. Allows for discrepancies in the security level. 
+    - Multiple values for securitylevel and compartments create ambiguity. Which level to actually consider?
+    - Potential security loop hole. If level is wrongly typed in, how to determine the correct level? In this case do we deny access
+     altogether or apply some disambiguation logic (probably not).
+
+All in all, the class based heirarchy is better if the classes remain the same through out the lifetime of the system. If the document
+securitylevel can change, then createing and deleting instances could be cumbersome. Thus, for an ever changing system, the property 
+approach looks better. 

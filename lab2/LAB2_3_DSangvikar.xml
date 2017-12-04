@@ -1,0 +1,61 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#"
+    xmlns:movie="http://utdallas/fall17/movie#"
+    xmlns:person="http://utdallas/fall17/person#"
+    xmlns:default="http://utdallas/fall17#"
+    xmlns:book="http://utdallas/fall17/book#">
+  <rdf:Description rdf:about="http://utdallas/fall17/movie#clockworkOrange">
+    <rdf:type rdf:resource="http://utdallas/fall17/movie#"/>
+    <dc:title>A Clockwork Orange</dc:title>
+    <dc:date>1971</dc:date>
+    <movie:genre>Crime, Drama, Sci-Fi</movie:genre>
+    <movie:directedby>
+      <rdf:Description rdf:about="http://utdallas/fall17/person#StanleyKubrick">
+        <vcard:FN>StanleyKubrick</vcard:FN>
+        <vcard:Given>Stanley</vcard:Given>
+        <vcard:Family>Kubrick</vcard:Family>
+      </rdf:Description>
+    </movie:directedby>
+    <movie:basedOn>
+      <rdf:Description rdf:about="http://utdallas/fall17/book#aclockworkorange">
+        <rdf:type rdf:resource="http://utdallas/fall17/book#"/>
+        <dc:creator>
+          <rdf:Description rdf:about="http://utdallas/fall17/person#anthonyBurgess">
+            <vcard:FN>AnthonyBurgess</vcard:FN>
+            <vcard:Given>Anthony</vcard:Given>
+            <vcard:Family>Burgess</vcard:Family>
+          </rdf:Description>
+        </dc:creator>
+        <dc:title>A ClockWork Orange</dc:title>
+        <dc:date>1962</dc:date>
+        <dc:language>en</dc:language>
+        <dc:identifier>ISBN:0434098000</dc:identifier>
+      </rdf:Description>
+    </movie:basedOn>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://utdallas/fall17/movie#drStrangelove">
+    <rdf:type rdf:resource="http://utdallas/fall17/movie#"/>
+    <dc:title>Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb</dc:title>
+    <dc:date>1964</dc:date>
+    <movie:genre>Comedy</movie:genre>
+    <movie:directedby rdf:resource="http://utdallas/fall17/person#StanleyKubrick"/>
+    <movie:basedOn>
+      <rdf:Description rdf:about="http://utdallas/fall17/book#redAlert">
+        <rdf:type rdf:resource="http://utdallas/fall17/book#"/>
+        <dc:creator>
+          <rdf:Description rdf:about="http://utdallas/fall17/person#peterGeorge">
+            <vcard:FN>PeterGeorge</vcard:FN>
+            <vcard:Given>Peter</vcard:Given>
+            <vcard:Family>George</vcard:Family>
+          </rdf:Description>
+        </dc:creator>
+        <dc:title>Red Alert</dc:title>
+        <dc:date>1958</dc:date>
+        <dc:language>en</dc:language>
+        <dc:identifier>ISBN:9781596545816</dc:identifier>
+      </rdf:Description>
+    </movie:basedOn>
+  </rdf:Description>
+</rdf:RDF>

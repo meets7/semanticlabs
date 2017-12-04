@@ -1,0 +1,44 @@
+#Query 1
+PREFIX em:<http://www.w3.org/2001/vcard-rdf/3.0#>
+select ?s where {
+  ?s em:FN "Jane Smith" .
+}
+
+#Query 2 
+PREFIX some:<http://somewhere/peopleInfo#>
+PREFIX em:<http://www.w3.org/2001/vcard-rdf/3.0#>
+
+select ?age where {
+  ?person some:age ?age .
+}
+
+#Query 3
+PREFIX some:<http://somewhere/peopleInfo#>
+PREFIX em:<http://www.w3.org/2001/vcard-rdf/3.0#>
+
+select ?fname ?age where {
+  ?person some:age ?age .
+  ?person em:FN ?fname
+}
+
+#Query 4
+PREFIX some:<http://somewhere/peopleInfo#>
+PREFIX em:<http://www.w3.org/2001/vcard-rdf/3.0#>
+
+select ?fname ?age where {
+  ?person some:age '23' .
+  ?person some:age ?age .
+  ?person em:FN ?fname .
+}
+
+#Query 5
+PREFIX some:<http://somewhere/peopleInfo#>
+PREFIX em:<http://www.w3.org/2001/vcard-rdf/3.0#>
+
+select ?given where {
+  ?person some:age ?age .
+  ?person em:FN ?fname .
+  ?person em:N _:b .
+  _:b em:Given ?given .
+}
+

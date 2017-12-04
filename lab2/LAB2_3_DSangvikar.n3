@@ -1,0 +1,71 @@
+@prefix default: <http://utdallas/fall17#> .
+@prefix movie: <http://utdallas/fall17/movie#> .
+@prefix person: <http://utdallas/fall17/person#> .
+@prefix book:  <http://utdallas/fall17/book#> .
+
+person:StanleyKubrick
+        <http://www.w3.org/2001/vcard-rdf/3.0#FN>
+                "StanleyKubrick" ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#Family>
+                "Kubrick" ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#Given>
+                "Stanley" .
+
+person:peterGeorge  <http://www.w3.org/2001/vcard-rdf/3.0#FN>
+                "PeterGeorge" ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#Family>
+                "George" ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#Given>
+                "Peter" .
+
+person:anthonyBurgess
+        <http://www.w3.org/2001/vcard-rdf/3.0#FN>
+                "AnthonyBurgess" ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#Family>
+                "Burgess" ;
+        <http://www.w3.org/2001/vcard-rdf/3.0#Given>
+                "Anthony" .
+
+book:redAlert  a  book: ;
+        <http://purl.org/dc/elements/1.1/creator>
+                person:peterGeorge ;
+        <http://purl.org/dc/elements/1.1/date>
+                "1958" ;
+        <http://purl.org/dc/elements/1.1/identifier>
+                "ISBN:9781596545816" ;
+        <http://purl.org/dc/elements/1.1/language>
+                "en" ;
+        <http://purl.org/dc/elements/1.1/title>
+                "Red Alert" .
+
+book:aclockworkorange
+        a       book: ;
+        <http://purl.org/dc/elements/1.1/creator>
+                person:anthonyBurgess ;
+        <http://purl.org/dc/elements/1.1/date>
+                "1962" ;
+        <http://purl.org/dc/elements/1.1/identifier>
+                "ISBN:0434098000" ;
+        <http://purl.org/dc/elements/1.1/language>
+                "en" ;
+        <http://purl.org/dc/elements/1.1/title>
+                "A ClockWork Orange" .
+
+movie:drStrangelove  a    movie: ;
+        <http://purl.org/dc/elements/1.1/date>
+                "1964" ;
+        <http://purl.org/dc/elements/1.1/title>
+                "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb" ;
+        movie:basedOn     book:redAlert ;
+        movie:directedby  person:StanleyKubrick ;
+        movie:genre       "Comedy" .
+
+movie:clockworkOrange
+        a                 movie: ;
+        <http://purl.org/dc/elements/1.1/date>
+                "1971" ;
+        <http://purl.org/dc/elements/1.1/title>
+                "A Clockwork Orange" ;
+        movie:basedOn     book:aclockworkorange ;
+        movie:directedby  person:StanleyKubrick ;
+        movie:genre       "Crime, Drama, Sci-Fi" .
